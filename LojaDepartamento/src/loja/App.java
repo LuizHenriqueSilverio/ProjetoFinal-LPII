@@ -8,7 +8,7 @@ package loja;
 
 /**
  *
- * @author 02239263610
+ * @author LuizHenriqueSilverio e gabrielcaproni
  */
 public class App {
 
