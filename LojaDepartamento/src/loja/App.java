@@ -8,7 +8,7 @@ package loja;
 
 /**
  *
- * @author luizh
+ * @author LuizHenriqueSilverio e gabrielcaproni
  */
 public class App {
 
