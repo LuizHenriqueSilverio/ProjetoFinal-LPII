@@ -16,6 +16,7 @@ public class App {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        
         Cliente c = new Cliente("Gabriel Caproni", "123.052.236-00", 
         "29/11/2003", "(35)9 9954-0325", "Rua dos Medicos");
 
@@ -52,6 +53,16 @@ public class App {
         System.out.println("Produto: " + e.getProduto().getDescricao());
         System.out.println("Quantidade: " + e.getQuantidade());
         System.out.println("Data de Validade: " + e.getDataValidade());
+        System.out.println("");
+        
+        Venda v = new Venda(c, p, 100, f, 1200, "12/03/2023");
+        
+        System.out.println("Cliente: " + v.getCliente().getNome());
+        System.out.println("Produto: " + v.getProduto().getDescricao());
+        System.out.println("Funcionario: " + v.getFuncionario().getNome());
+        System.out.println("Data da Venda: " + v.getDataVenda());
+        System.out.println("Quantidade: " + v.getQtd());
+        System.out.println("Valor da venda: " + v.getValorVenda());
         
     }
     

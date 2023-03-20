@@ -11,7 +11,7 @@ package loja;
 public class Estoque {
     
     private Produto produto;
-    private int quantidade;
+    private double quantidade;
     private String dataValidade;
     
     public Estoque(Produto produto, int qtd, String dataVal){
@@ -38,7 +38,7 @@ public class Estoque {
     /**
      * @return the quantidade
      */
-    public int getQuantidade() {
+    public double getQuantidade() {
         return quantidade;
     }
 
