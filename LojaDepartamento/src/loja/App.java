@@ -45,6 +45,13 @@ public class App {
         System.out.println("CPF do funcionario: " + f.getCpf());
         System.out.println("Departamento: " + f.getDepartamento());
         System.out.println("Salario: R$" + f.getSalario());
+        System.out.println("");
+        
+        Estoque e = new Estoque(p, 5, "Sem data de validade");
+        
+        System.out.println("Produto: " + e.getProduto().getDescricao());
+        System.out.println("Quantidade: " + e.getQuantidade());
+        System.out.println("Data de Validade: " + e.getDataValidade());
         
     }
     
