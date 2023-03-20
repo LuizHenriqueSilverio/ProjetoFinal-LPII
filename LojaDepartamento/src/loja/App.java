@@ -16,7 +16,7 @@ public class App {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        
+        System.out.println("*** CLIENTE ***");
         Cliente c = new Cliente("Gabriel Caproni", "123.052.236-00", 
         "29/11/2003", "(35)9 9954-0325", "Rua dos Medicos");
 
@@ -27,7 +27,7 @@ public class App {
         System.out.println("Endereco: " + c.getEndereco());
         System.out.println("");
 
-        
+        System.out.println("*** PRODUTO ***");
         Produto p = new Produto("SSD 240GB", 150.00, 225.00);
         
         System.out.println("Produto: " + p.getDescricao());
@@ -40,6 +40,7 @@ public class App {
         System.out.println("Novo preco de venda: " + p.getPrecoVenda());
         System.out.println("");
         
+        System.out.println("*** FUNCIONARIO ***");
         Funcionario f = new Funcionario("Luiz Henrique", "123.456.789-10", "Eletrodomésticos", 2500.00);
         
         System.out.println("Nome do funcionario: " + f.getNome());
@@ -48,6 +49,7 @@ public class App {
         System.out.println("Salario: R$" + f.getSalario());
         System.out.println("");
         
+        System.out.println("*** ESTOQUE ***");
         Estoque e = new Estoque(p, 5, "Sem data de validade");
         
         System.out.println("Produto: " + e.getProduto().getDescricao());
@@ -55,6 +57,7 @@ public class App {
         System.out.println("Data de Validade: " + e.getDataValidade());
         System.out.println("");
         
+        System.out.println("*** VENDA ***");
         Venda v = new Venda(c, p, 100, f, 1200, "12/03/2023");
         
         System.out.println("Cliente: " + v.getCliente().getNome());
@@ -63,6 +66,9 @@ public class App {
         System.out.println("Data da Venda: " + v.getDataVenda());
         System.out.println("Quantidade: " + v.getQtd());
         System.out.println("Valor da venda: " + v.getValorVenda());
+        System.out.println("");
+        
+        System.out.println("*** FELIZ NATAL ***");
         
     }
     
