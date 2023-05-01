@@ -9,7 +9,7 @@ package loja;
  *
  * @author luizh
  */
-public class Funcionario {
+public class Funcionario implements Pessoa{
     private String nome;
     private String cpf;
     private String dataAdmissao;
@@ -27,6 +27,7 @@ public class Funcionario {
     /**
      * @return the nome
      */
+    @Override
     public String getNome() {
         return nome;
     }
@@ -34,6 +35,7 @@ public class Funcionario {
     /**
      * @param nome the nome to set
      */
+    @Override
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -41,6 +43,7 @@ public class Funcionario {
     /**
      * @return the cpf
      */
+    @Override
     public String getCpf() {
         return cpf;
     }
@@ -48,6 +51,7 @@ public class Funcionario {
     /**
      * @param cpf the cpf to set
      */
+    @Override
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }

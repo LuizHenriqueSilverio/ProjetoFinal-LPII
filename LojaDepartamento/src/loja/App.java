@@ -21,7 +21,7 @@ public class App {
         "29/11/2003", "(35)9 9954-0325", "Rua dos Medicos");
 
         System.out.println("Nome: " + c.getNome());
-        System.out.println("CPF: " + c.getCPF());
+        System.out.println("CPF: " + c.getCpf());
         System.out.println("Data de Nascimento: " + c.getDataNascimento());
         System.out.println("Telefone: " + c.getTelefone());
         System.out.println("Endereco: " + c.getEndereco());

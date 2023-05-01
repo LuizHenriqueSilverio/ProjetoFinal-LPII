@@ -10,17 +10,17 @@ import java.util.Calendar;
  *
  * @author Gabriel Caproni Pegoraro
  */
-public class Cliente {
+public class Cliente implements Pessoa{
     
     private String nome;
-    private String CPF;
+    private String cpf;
     private String dataNascimento;
     private String telefone;
     private String endereco;
     
     public Cliente(String nome, String CPF, String dataNasc, String telefone, String endereco){
         this.nome = nome;
-        this.CPF = CPF;
+        this.cpf = CPF;
         this.dataNascimento = dataNasc;
         this.telefone = telefone;
         this.endereco = endereco;
@@ -29,6 +29,7 @@ public class Cliente {
     /**
      * @return the nome
      */
+    @Override
     public String getNome() {
         return nome;
     }
@@ -36,22 +37,25 @@ public class Cliente {
     /**
      * @param nome the nome to set
      */
+    @Override
     public void setNome(String nome) {
         this.nome = nome;
     }
 
     /**
-     * @return the CPF
+     * @return the cpf
      */
-    public String getCPF() {
-        return CPF;
+    @Override
+    public String getCpf() {
+        return cpf;
     }
 
     /**
-     * @param CPF the CPF to set
+     * @param cpf the cpf to set
      */
-    public void setCPF(String CPF) {
-        this.CPF = CPF;
+    @Override
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
     }
 
     /**
