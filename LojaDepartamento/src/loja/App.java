@@ -41,7 +41,7 @@ public class App {
         System.out.println("");
         
         System.out.println("*** FUNCIONARIO ***");
-        Funcionario f = new Funcionario("Luiz Henrique", "123.456.789-10", "Eletrodomésticos", 2500.00);
+        Funcionario f = new Gerente("Luiz Henrique", "123.456.789-10", "Eletrodomésticos", 2500.00);
         
         System.out.println("Nome do funcionario: " + f.getNome());
         System.out.println("CPF do funcionario: " + f.getCpf());
