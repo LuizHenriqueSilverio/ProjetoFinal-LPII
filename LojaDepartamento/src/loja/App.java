@@ -1,5 +1,8 @@
 package loja;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -69,6 +72,19 @@ public class App {
         System.out.println("");
         
         System.out.println("*** FELIZ NATAL ***");
+        
+        List<Funcionario> listaFuncionarios = new ArrayList<>();
+
+        /*Polimorfismo*/
+        Gerente gerente1 = new Gerente("João", "123.456.789-00", "Vendas", 5000.00);
+        Funcionario funcionario1 = new Gerente("Maria", "987.654.321-00", "Financeiro", 3000.00);
+
+        listaFuncionarios.add(gerente1);
+        listaFuncionarios.add(funcionario1);
+
+        for (Funcionario func : listaFuncionarios) {
+            System.out.println(func.getNome() + ": " + func.getBonifica());
+        }
         
     }
     
