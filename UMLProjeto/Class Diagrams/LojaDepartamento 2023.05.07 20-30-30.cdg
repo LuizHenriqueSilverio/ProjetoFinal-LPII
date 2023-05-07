@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClassDiagram name="LojaDepartamento">
+  <ClassDiagramComponents>
+    <Class name="App" package="loja" visibility="public" xPosition="20.0" yPosition="20.0">
+      <Fields/>
+      <Constructors/>
+      <Methods>
+        <Method name="main" returnType="void" visibility="public" isStatic="true">
+          <Argument type="String[]" name="args"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Cliente" package="loja" visibility="public" xPosition="428.0" yPosition="20.0">
+      <Fields>
+        <Field name="nome" type="String" visibility="private"/>
+        <Field name="cpf" type="String" visibility="private"/>
+        <Field name="dataNascimento" type="String" visibility="private"/>
+        <Field name="telefone" type="String" visibility="private"/>
+        <Field name="endereco" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="String" name="CPF"/>
+          <Argument type="String" name="dataNasc"/>
+          <Argument type="String" name="telefone"/>
+          <Argument type="String" name="endereco"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNome" returnType="String" visibility="public"/>
+        <Method name="setNome" returnType="void" visibility="public">
+          <Argument type="String" name="nome"/>
+        </Method>
+        <Method name="getCpf" returnType="String" visibility="public"/>
+        <Method name="setCpf" returnType="void" visibility="public">
+          <Argument type="String" name="cpf"/>
+        </Method>
+        <Method name="getDataNascimento" returnType="String" visibility="public"/>
+        <Method name="setDataNascimento" returnType="void" visibility="public">
+          <Argument type="String" name="dataNascimento"/>
+        </Method>
+        <Method name="getTelefone" returnType="String" visibility="public"/>
+        <Method name="setTelefone" returnType="void" visibility="public">
+          <Argument type="String" name="telefone"/>
+        </Method>
+        <Method name="getEndereco" returnType="String" visibility="public"/>
+        <Method name="setEndereco" returnType="void" visibility="public">
+          <Argument type="String" name="endereco"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Estoque" package="loja" visibility="public" xPosition="1590.0" yPosition="473.0">
+      <Fields>
+        <Field name="produto" type="Produto" visibility="private"/>
+        <Field name="quantidade" type="double" visibility="private"/>
+        <Field name="dataValidade" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Produto" name="produto"/>
+          <Argument type="int" name="qtd"/>
+          <Argument type="String" name="dataVal"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getProduto" returnType="Produto" visibility="public"/>
+        <Method name="setProduto" returnType="void" visibility="public">
+          <Argument type="Produto" name="produto"/>
+        </Method>
+        <Method name="getQuantidade" returnType="double" visibility="public"/>
+        <Method name="setQuantidade" returnType="void" visibility="public">
+          <Argument type="int" name="quantidade"/>
+        </Method>
+        <Method name="getDataValidade" returnType="String" visibility="public"/>
+        <Method name="setDataValidade" returnType="void" visibility="public">
+          <Argument type="String" name="dataValidade"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Funcionario" package="loja" visibility="public" xPosition="446.0" yPosition="562.0">
+      <Fields>
+        <Field name="nome" type="String" visibility="private"/>
+        <Field name="cpf" type="String" visibility="private"/>
+        <Field name="dataAdmissao" type="String" visibility="private"/>
+        <Field name="dataRescisao" type="String" visibility="private"/>
+        <Field name="departamento" type="String" visibility="private"/>
+        <Field name="salario" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="String" name="cpf"/>
+          <Argument type="String" name="dep"/>
+          <Argument type="double" name="salario"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getNome" returnType="String" visibility="public"/>
+        <Method name="setNome" returnType="void" visibility="public">
+          <Argument type="String" name="nome"/>
+        </Method>
+        <Method name="getCpf" returnType="String" visibility="public"/>
+        <Method name="setCpf" returnType="void" visibility="public">
+          <Argument type="String" name="cpf"/>
+        </Method>
+        <Method name="getDataAdmissao" returnType="String" visibility="public"/>
+        <Method name="setDataAdmissao" returnType="void" visibility="public">
+          <Argument type="String" name="dataAdmissao"/>
+        </Method>
+        <Method name="getDataRescisao" returnType="String" visibility="public"/>
+        <Method name="setDataRescisao" returnType="void" visibility="public">
+          <Argument type="String" name="dataRescisao"/>
+        </Method>
+        <Method name="getDepartamento" returnType="String" visibility="public"/>
+        <Method name="setDepartamento" returnType="void" visibility="public">
+          <Argument type="String" name="departamento"/>
+        </Method>
+        <Method name="getSalario" returnType="double" visibility="public"/>
+        <Method name="setSalario" returnType="void" visibility="public">
+          <Argument type="double" name="salario"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Produto" package="loja" visibility="public" xPosition="1520.0" yPosition="20.0">
+      <Fields>
+        <Field name="descricao" type="String" visibility="private"/>
+        <Field name="precoCusto" type="double" visibility="private"/>
+        <Field name="precoVenda" type="double" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="descricao"/>
+          <Argument type="double" name="pCusto"/>
+          <Argument type="double" name="pVenda"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getDescricao" returnType="String" visibility="public"/>
+        <Method name="setDescricao" returnType="void" visibility="public">
+          <Argument type="String" name="descricao"/>
+        </Method>
+        <Method name="getPrecoCusto" returnType="double" visibility="public"/>
+        <Method name="setPrecoCusto" returnType="void" visibility="public">
+          <Argument type="double" name="precoCusto"/>
+        </Method>
+        <Method name="getPrecoVenda" returnType="double" visibility="public"/>
+        <Method name="setPrecoVenda" returnType="void" visibility="public">
+          <Argument type="double" name="precoVenda"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Class name="Venda" package="loja" visibility="public" xPosition="987.0" yPosition="407.0">
+      <Fields>
+        <Field name="cliente" type="Cliente" visibility="private"/>
+        <Field name="produto" type="Produto" visibility="private"/>
+        <Field name="qtd" type="double" visibility="private"/>
+        <Field name="funcionario" type="Funcionario" visibility="private"/>
+        <Field name="valorVenda" type="double" visibility="private"/>
+        <Field name="dataVenda" type="String" visibility="private"/>
+      </Fields>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="Cliente" name="cli"/>
+          <Argument type="Produto" name="prod"/>
+          <Argument type="double" name="qtd"/>
+          <Argument type="Funcionario" name="func"/>
+          <Argument type="double" name="valor"/>
+          <Argument type="String" name="data"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getCliente" returnType="Cliente" visibility="public"/>
+        <Method name="setCliente" returnType="void" visibility="public">
+          <Argument type="Cliente" name="cliente"/>
+        </Method>
+        <Method name="getProduto" returnType="Produto" visibility="public"/>
+        <Method name="setProduto" returnType="void" visibility="public">
+          <Argument type="Produto" name="produto"/>
+        </Method>
+        <Method name="getQtd" returnType="double" visibility="public"/>
+        <Method name="setQtd" returnType="void" visibility="public">
+          <Argument type="double" name="qtd"/>
+        </Method>
+        <Method name="getFuncionario" returnType="Funcionario" visibility="public"/>
+        <Method name="setFuncionario" returnType="void" visibility="public">
+          <Argument type="Funcionario" name="funcionario"/>
+        </Method>
+        <Method name="getValorVenda" returnType="double" visibility="public"/>
+        <Method name="setValorVenda" returnType="void" visibility="public">
+          <Argument type="double" name="valorVenda"/>
+        </Method>
+        <Method name="getDataVenda" returnType="String" visibility="public"/>
+        <Method name="setDataVenda" returnType="void" visibility="public">
+          <Argument type="String" name="dataVenda"/>
+        </Method>
+      </Methods>
+    </Class>
+    <Interface name="Pessoa" package="loja" visibility="public" xPosition="166.0" yPosition="429.0">
+      <Methods>
+        <Method name="getCpf" returnType="String" visibility="public"/>
+        <Method name="getNome" returnType="String" visibility="public"/>
+        <Method name="setCpf" returnType="void" visibility="public">
+          <Argument type="String" name="cpf"/>
+        </Method>
+        <Method name="setNome" returnType="void" visibility="public">
+          <Argument type="String" name="nome"/>
+        </Method>
+      </Methods>
+    </Interface>
+  </ClassDiagramComponents>
+  <ClassDiagramRelations>
+    <HasRelation name="funcionario" source="loja.Venda" target="loja.Funcionario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="loja.Estoque" target="loja.Produto" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="produto" source="loja.Estoque" target="loja.Produto" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="produto" source="loja.Venda" target="loja.Produto" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="loja.Funcionario" target="loja.Pessoa"/>
+    <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="loja.Cliente" target="loja.Pessoa"/>
+    <UseRelation source="loja.Venda" target="loja.Funcionario" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="cliente" source="loja.Venda" target="loja.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="loja.Venda" target="loja.Produto" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="loja.Venda" target="loja.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+  </ClassDiagramRelations>
+</ClassDiagram>
