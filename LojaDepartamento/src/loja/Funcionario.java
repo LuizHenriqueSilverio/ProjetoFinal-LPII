@@ -9,7 +9,7 @@ package loja;
  *
  * @author luizh
  */
-public class Funcionario implements Pessoa{
+   abstract class Funcionario implements Pessoa{
     private String nome;
     private String cpf;
     private String dataAdmissao;
@@ -111,4 +111,10 @@ public class Funcionario implements Pessoa{
     public void setSalario(double salario) {
         this.salario = salario;
     }
+    
+    public void bonifica(double aumento){
+       this.salario = salario + aumento;
+    } 
+     
+    abstract double getBonifica();
 }

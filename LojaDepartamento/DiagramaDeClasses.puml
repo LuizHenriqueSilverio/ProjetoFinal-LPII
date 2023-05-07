@@ -1,0 +1,19 @@
+@startuml
+abstract class loja.Funcionario
+annotation java.lang.Override
+class java.util.Calendar
+class loja.App
+class loja.Cliente
+class loja.Estoque
+class loja.Gerente
+class loja.Produto
+class loja.Venda
+interface loja.Pessoa
+loja.Funcionario ..> java.lang.Override
+loja.Funcionario --|> loja.Pessoa
+loja.Cliente ..> java.lang.Override
+loja.Cliente ..> java.util.Calendar
+loja.Cliente --|> loja.Pessoa
+loja.Gerente --|> loja.Funcionario
+loja.Gerente ..> java.lang.Override
+@enduml

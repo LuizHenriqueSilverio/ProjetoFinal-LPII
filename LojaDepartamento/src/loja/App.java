@@ -1,5 +1,8 @@
 package loja;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -41,7 +44,7 @@ public class App {
         System.out.println("");
         
         System.out.println("*** FUNCIONARIO ***");
-        Funcionario f = new Funcionario("Luiz Henrique", "123.456.789-10", "Eletrodomésticos", 2500.00);
+        Funcionario f = new Gerente("Luiz Henrique", "123.456.789-10", "Eletrodomésticos", 2500.00);
         
         System.out.println("Nome do funcionario: " + f.getNome());
         System.out.println("CPF do funcionario: " + f.getCpf());
@@ -69,6 +72,19 @@ public class App {
         System.out.println("");
         
         System.out.println("*** FELIZ NATAL ***");
+        
+        List<Funcionario> listaFuncionarios = new ArrayList<>();
+
+        /*Polimorfismo*/
+        Gerente gerente1 = new Gerente("João", "123.456.789-00", "Vendas", 5000.00);
+        Funcionario vendedor1 = new Vendedor("Maria", "987.654.321-00", "Financeiro", 3000.00);
+
+        listaFuncionarios.add(gerente1);
+        listaFuncionarios.add(vendedor1);
+
+        for (Funcionario func : listaFuncionarios) {
+            System.out.println(func.getNome() + ": " + func.getBonifica());
+        }
         
     }
     
