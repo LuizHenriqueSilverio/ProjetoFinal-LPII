@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<ClassDiagram name="LojaDepartamento">
+<ClassDiagram name="loja">
   <ClassDiagramComponents>
     <Class name="App" package="loja" visibility="public" xPosition="20.0" yPosition="20.0">
       <Fields/>
@@ -11,7 +11,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Cliente" package="loja" visibility="public" xPosition="428.0" yPosition="20.0">
+    <Class name="Cliente" package="loja" visibility="public" xPosition="1347.0" yPosition="676.0">
       <Fields>
         <Field name="nome" type="String" visibility="private"/>
         <Field name="cpf" type="String" visibility="private"/>
@@ -51,7 +51,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Estoque" package="loja" visibility="public" xPosition="1590.0" yPosition="473.0">
+    <Class name="Estoque" package="loja" visibility="public" xPosition="1596.0" yPosition="352.0">
       <Fields>
         <Field name="produto" type="Produto" visibility="private"/>
         <Field name="quantidade" type="double" visibility="private"/>
@@ -79,7 +79,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Funcionario" package="loja" visibility="public" xPosition="446.0" yPosition="562.0">
+    <Class name="Funcionario" package="loja" visibility="public" isAbstract="true" xPosition="698.0" yPosition="867.0">
       <Fields>
         <Field name="nome" type="String" visibility="private"/>
         <Field name="cpf" type="String" visibility="private"/>
@@ -121,9 +121,27 @@
         <Method name="setSalario" returnType="void" visibility="public">
           <Argument type="double" name="salario"/>
         </Method>
+        <Method name="bonifica" returnType="void" visibility="public">
+          <Argument type="double" name="aumento"/>
+        </Method>
+        <Method name="getBonifica" returnType="double" visibility="package" isAbstract="true"/>
       </Methods>
     </Class>
-    <Class name="Produto" package="loja" visibility="public" xPosition="1520.0" yPosition="20.0">
+    <Class name="Gerente" package="loja" visibility="public" xPosition="51.0" yPosition="636.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="String" name="cpf"/>
+          <Argument type="String" name="dep"/>
+          <Argument type="double" name="salario"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getBonifica" returnType="double" visibility="public"/>
+      </Methods>
+    </Class>
+    <Class name="Produto" package="loja" visibility="public" xPosition="1820.0" yPosition="20.0">
       <Fields>
         <Field name="descricao" type="String" visibility="private"/>
         <Field name="precoCusto" type="double" visibility="private"/>
@@ -151,7 +169,7 @@
         </Method>
       </Methods>
     </Class>
-    <Class name="Venda" package="loja" visibility="public" xPosition="987.0" yPosition="407.0">
+    <Class name="Venda" package="loja" visibility="public" xPosition="1763.0" yPosition="1189.0">
       <Fields>
         <Field name="cliente" type="Cliente" visibility="private"/>
         <Field name="produto" type="Produto" visibility="private"/>
@@ -197,7 +215,21 @@
         </Method>
       </Methods>
     </Class>
-    <Interface name="Pessoa" package="loja" visibility="public" xPosition="166.0" yPosition="429.0">
+    <Class name="Vendedor" package="loja" visibility="public" xPosition="20.0" yPosition="971.0">
+      <Fields/>
+      <Constructors>
+        <Constructor visibility="public">
+          <Argument type="String" name="nome"/>
+          <Argument type="String" name="cpf"/>
+          <Argument type="String" name="dep"/>
+          <Argument type="double" name="salario"/>
+        </Constructor>
+      </Constructors>
+      <Methods>
+        <Method name="getBonifica" returnType="double" visibility="package"/>
+      </Methods>
+    </Class>
+    <Interface name="Pessoa" package="loja" visibility="public" xPosition="1357.0" yPosition="20.0">
       <Methods>
         <Method name="getCpf" returnType="String" visibility="public"/>
         <Method name="getNome" returnType="String" visibility="public"/>
@@ -211,15 +243,17 @@
     </Interface>
   </ClassDiagramComponents>
   <ClassDiagramRelations>
-    <HasRelation name="funcionario" source="loja.Venda" target="loja.Funcionario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="loja.Estoque" target="loja.Produto" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="produto" source="loja.Estoque" target="loja.Produto" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <HasRelation name="produto" source="loja.Venda" target="loja.Produto" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="loja.Venda" target="loja.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <UseRelation source="loja.Estoque" target="loja.Produto" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="loja.Gerente" target="loja.Funcionario"/>
+    <HasRelation name="funcionario" source="loja.Venda" target="loja.Funcionario" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="loja.Funcionario" target="loja.Pessoa"/>
+    <HasRelation name="cliente" source="loja.Venda" target="loja.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <HasRelation name="produto" source="loja.Estoque" target="loja.Produto" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
     <ImplementsRelation name="&lt;&lt;implements&gt;&gt;" source="loja.Cliente" target="loja.Pessoa"/>
     <UseRelation source="loja.Venda" target="loja.Funcionario" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <HasRelation name="cliente" source="loja.Venda" target="loja.Cliente" type="Aggregation" sourceCardinality="1..1" targetCardinality="1..1"/>
+    <IsRelation name="is" source="loja.Vendedor" target="loja.Funcionario"/>
     <UseRelation source="loja.Venda" target="loja.Produto" sourceCardinality="1..1" targetCardinality="1..1"/>
-    <UseRelation source="loja.Venda" target="loja.Cliente" sourceCardinality="1..1" targetCardinality="1..1"/>
   </ClassDiagramRelations>
 </ClassDiagram>
