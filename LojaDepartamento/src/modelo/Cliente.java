@@ -5,6 +5,7 @@
 package modelo;
 
 import java.util.Calendar;
+import java.util.Objects;
 
 /**
  *
@@ -115,4 +116,30 @@ public class Cliente implements Pessoa{
         this.codCliente = codCliente;
     }
 
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 41 * hash + Objects.hashCode(this.codCliente);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Cliente other = (Cliente) obj;
+        if (!Objects.equals(this.codCliente, other.codCliente)) {
+            return false;
+        }
+        return true;
+    }
+
+    
 }
