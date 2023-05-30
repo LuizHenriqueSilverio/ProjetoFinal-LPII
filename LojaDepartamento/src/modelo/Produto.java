@@ -10,6 +10,8 @@ package modelo;
  * @author luizh
  */
 public class Produto {
+    
+    private Integer codProduto;
     private String descricao;
     private double precoCusto;
     private double precoVenda;
@@ -60,6 +62,20 @@ public class Produto {
      */
     public void setPrecoVenda(double precoVenda) {
         this.precoVenda = precoVenda;
+    }
+
+    /**
+     * @return the codProduto
+     */
+    public Integer getCodProduto() {
+        return codProduto;
+    }
+
+    /**
+     * @param codProduto the codProduto to set
+     */
+    public void setCodProduto(Integer codProduto) {
+        this.codProduto = codProduto;
     }
     
     

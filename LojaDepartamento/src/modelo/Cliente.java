@@ -12,6 +12,7 @@ import java.util.Calendar;
  */
 public class Cliente implements Pessoa{
     
+    private Integer codCliente;
     private String nome;
     private String cpf;
     private String dataNascimento;
@@ -98,6 +99,20 @@ public class Cliente implements Pessoa{
      */
     public void setEndereco(String endereco) {
         this.endereco = endereco;
+    }
+
+    /**
+     * @return the codCliente
+     */
+    public Integer getCodCliente() {
+        return codCliente;
+    }
+
+    /**
+     * @param codCliente the codCliente to set
+     */
+    public void setCodCliente(Integer codCliente) {
+        this.codCliente = codCliente;
     }
 
 }
