@@ -103,7 +103,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuCidadeActionPerformed
 
     private void menuFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncionarioActionPerformed
-        FormFuncionario form = new FormFuncionario(this, true);
+        FormProduto form = new FormProduto(this, true);
         form.setLocationRelativeTo(null);
         form.setResizable(false);
         form.setVisible(true);

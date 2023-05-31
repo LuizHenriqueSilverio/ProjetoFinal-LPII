@@ -147,56 +147,14 @@
                 <Component class="javax.swing.JTable" name="tblFuncionario">
                   <Properties>
                     <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
-                      <TableColumnModel selectionModel="0">
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                        <Column maxWidth="-1" minWidth="-1" prefWidth="-1" resizable="true">
-                          <Title/>
-                          <Editor/>
-                          <Renderer/>
-                        </Column>
-                      </TableColumnModel>
+                      <TableColumnModel selectionModel="0"/>
                     </Property>
                     <Property name="tableHeader" type="javax.swing.table.JTableHeader" editor="org.netbeans.modules.form.editors2.JTableHeaderEditor">
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
                   <BindingProperties>
-                    <BindingProperty name="elements" source="listProduto" target="tblFuncionario" targetPath="elements" updateStrategy="0" immediately="true">
-                      <Subbinding sourcePath="${codFuncionario}">
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
-                      </Subbinding>
-                      <Subbinding sourcePath="${nascimentoFuncionario}">
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Calendar.class"/>
-                      </Subbinding>
-                      <Subbinding sourcePath="${nomeFuncionario}">
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
-                      </Subbinding>
-                      <Subbinding sourcePath="${objCidade}">
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="modelo.Cidade.class"/>
-                      </Subbinding>
-                      <Subbinding sourcePath="${salarioFuncionario}">
-                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Double.class"/>
-                      </Subbinding>
-                    </BindingProperty>
+                    <BindingProperty name="elements" source="listProduto" target="tblFuncionario" targetPath="elements" updateStrategy="0" immediately="true"/>
                   </BindingProperties>
                 </Component>
               </SubComponents>
@@ -417,11 +375,7 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="txtNascimento">
               <BindingProperties>
-                <BindingProperty name="value" source="tblFuncionario" sourcePath="${selectedElement.nascimentoFuncionario}" target="txtNascimento" targetPath="value" updateStrategy="0" immediately="false">
-                  <Property name="converter" type="org.jdesktop.beansbinding.Converter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                    <ComponentRef name="default"/>
-                  </Property>
-                </BindingProperty>
+                <BindingProperty name="value" source="tblFuncionario" sourcePath="${selectedElement.nascimentoFuncionario}" target="txtNascimento" targetPath="value" updateStrategy="0" immediately="false"/>
               </BindingProperties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(maskData)"/>

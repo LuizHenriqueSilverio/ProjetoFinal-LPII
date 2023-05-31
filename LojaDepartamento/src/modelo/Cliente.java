@@ -20,6 +20,10 @@ public class Cliente implements Pessoa{
     private String telefone;
     private String endereco;
     
+    public Cliente() {
+        
+    }
+    
     public Cliente(String nome, String CPF, String dataNasc, String telefone, String endereco){
         this.nome = nome;
         this.cpf = CPF;
@@ -27,7 +31,7 @@ public class Cliente implements Pessoa{
         this.telefone = telefone;
         this.endereco = endereco;
     }
-
+    
     /**
      * @return the nome
      */

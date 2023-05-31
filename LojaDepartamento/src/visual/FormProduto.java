@@ -15,7 +15,7 @@ import modelo.Cliente;
  *
  * @author luizh
  */
-public class FormFuncionario extends java.awt.Dialog {
+public class FormProduto extends java.awt.Dialog {
 
     DAOProduto objDAOProduto = new DAOProduto();
     DAOCliente objDAOCliente = new DAOCliente();
@@ -24,7 +24,7 @@ public class FormFuncionario extends java.awt.Dialog {
     /**
      * Creates new form FormCidade
      */
-    public FormFuncionario(java.awt.Frame parent, boolean modal) {
+    public FormProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         atualizaTabela();
@@ -199,21 +199,6 @@ public class FormFuncionario extends java.awt.Dialog {
         Listagem.setLayout(new java.awt.BorderLayout());
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listProduto, tblFuncionario);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codFuncionario}"));
-        columnBinding.setColumnName("Cod Funcionario");
-        columnBinding.setColumnClass(Integer.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nascimentoFuncionario}"));
-        columnBinding.setColumnName("Nascimento Funcionario");
-        columnBinding.setColumnClass(java.util.Calendar.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nomeFuncionario}"));
-        columnBinding.setColumnName("Nome Funcionario");
-        columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${objCidade}"));
-        columnBinding.setColumnName("Obj Cidade");
-        columnBinding.setColumnClass(modelo.Cidade.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${salarioFuncionario}"));
-        columnBinding.setColumnName("Salario Funcionario");
-        columnBinding.setColumnClass(Double.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane2.setViewportView(tblFuncionario);
@@ -304,7 +289,6 @@ public class FormFuncionario extends java.awt.Dialog {
         jLabel6.setText("Nascimento:");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nascimentoFuncionario}"), txtNascimento, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        binding.setConverter(null);
         bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
@@ -417,7 +401,7 @@ public class FormFuncionario extends java.awt.Dialog {
     }//GEN-LAST:event_txtFuncionarioActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        listProduto.add((Cliente) new Cliente()); // cria um objeto e uma linha na tabela
+        listProduto.add((Produto) new Produto()); // cria um objeto e uma linha na tabela
         int linha = listProduto.size() - 1;
         tblFuncionario.setRowSelectionInterval(linha, linha); //seleciona a linha
         txtFuncionario.requestFocus(); //caixa de texto com o nome da cidade recebe o foco
@@ -498,7 +482,7 @@ public class FormFuncionario extends java.awt.Dialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormFuncionario dialog = new FormFuncionario(new java.awt.Frame(), true);
+                FormProduto dialog = new FormProduto(new java.awt.Frame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);

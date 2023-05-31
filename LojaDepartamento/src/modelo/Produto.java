@@ -18,6 +18,10 @@ public class Produto {
     private double precoCusto;
     private double precoVenda;
 
+    public Produto() {
+        
+    }
+    
     public Produto(String descricao, double pCusto, double pVenda) {
         this.descricao = descricao;
         this.precoCusto = pCusto;
