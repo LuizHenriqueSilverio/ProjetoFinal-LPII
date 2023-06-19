@@ -42,7 +42,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         menuCadastro.setText("Cadastro");
 
-        menuCidade.setText("Cidade");
+        menuCidade.setText("Clientes");
         menuCidade.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuCidadeActionPerformed(evt);
@@ -50,7 +50,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(menuCidade);
 
-        menuFuncionario.setText("Funcionario");
+        menuFuncionario.setText("Produtos");
         menuFuncionario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuFuncionarioActionPerformed(evt);
