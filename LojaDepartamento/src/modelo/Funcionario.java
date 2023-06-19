@@ -9,12 +9,13 @@ package modelo;
  *
  * @author luizh
  */
-   abstract class Funcionario implements Pessoa{
+   public class Funcionario implements Pessoa{
     private String nome;
     private String cpf;
     private String dataAdmissao;
     private String dataRescisao;
     private String departamento;
+    private String cargo;
     private double salario;
 
     public Funcionario(String nome, String cpf, String dep, double salario) {
@@ -114,7 +115,19 @@ package modelo;
     
     public void bonifica(double aumento){
        this.salario = salario + aumento;
-    } 
-     
-    abstract double getBonifica();
+    }
+
+    /**
+     * @return the cargo
+     */
+    public String getCargo() {
+        return cargo;
+    }
+
+    /**
+     * @param cargo the cargo to set
+     */
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
 }
