@@ -4,7 +4,7 @@
   <NonVisualComponents>
     <Component class="java.util.List" name="listCliente">
       <AuxValues>
-        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList&lt;Cliente&gt;())&#xd;&#xa;"/>
+        <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList &lt;Cliente&gt;())&#xd;&#xa;"/>
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cliente&gt;"/>
       </AuxValues>
     </Component>
@@ -188,7 +188,7 @@
                         <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${cpf}">
-                        <BindingParameter name="NAME" value="CPF"/>
+                        <BindingParameter name="NAME" value="Cpf"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
@@ -197,18 +197,18 @@
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
-                      <Subbinding sourcePath="${dataNascimento}">
-                        <BindingParameter name="NAME" value="Nascimento"/>
+                      <Subbinding sourcePath="${telefone}">
+                        <BindingParameter name="NAME" value="Telefone"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
                       <Subbinding sourcePath="${endereco}">
-                        <BindingParameter name="NAME" value="Endere&#xe7;o"/>
+                        <BindingParameter name="NAME" value="Endereco"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
-                      <Subbinding sourcePath="${telefone}">
-                        <BindingParameter name="NAME" value="Telefone"/>
+                      <Subbinding sourcePath="${nascimentoFormatado}">
+                        <BindingParameter name="NAME" value="Data Nascimento"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
                         <BindingParameter name="javax.swing.binding.ParameterKeys.EDITABLE" value="false"/>
                       </Subbinding>
@@ -237,20 +237,36 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtTelefone" pref="218" max="32767" attributes="0"/>
-                          <Component id="txtNome" pref="218" max="32767" attributes="0"/>
-                          <Component id="txtCodigo" min="-2" pref="51" max="-2" attributes="0"/>
-                          <Component id="txtCpf" pref="218" max="32767" attributes="0"/>
-                          <Component id="txtEndereco" alignment="0" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Component id="txtNascimento" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="1" attributes="0">
+                                      <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtTelefone" pref="218" max="32767" attributes="0"/>
+                                  <Component id="txtNome" pref="218" max="32767" attributes="0"/>
+                                  <Component id="txtCodigo" min="-2" pref="51" max="-2" attributes="0"/>
+                                  <Component id="txtCpf" pref="218" max="32767" attributes="0"/>
+                                  <Component id="txtEndereco" alignment="0" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -283,10 +299,15 @@
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel7" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="txtNascimento" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="txtEndereco" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="92" max="32767" attributes="0"/>
+                      <EmptySpace pref="54" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -307,7 +328,7 @@
                 <Property name="editable" type="boolean" value="false"/>
               </Properties>
               <BindingProperties>
-                <BindingProperty name="text" source="tblCliente" sourcePath="${selectedElement.codCidade}" target="txtCodigo" targetPath="text" updateStrategy="0" immediately="false">
+                <BindingProperty name="text" source="tblCliente" sourcePath="${selectedElement.codCliente}" target="txtCodigo" targetPath="text" updateStrategy="0" immediately="false">
                   <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
                 </BindingProperty>
               </BindingProperties>
@@ -422,6 +443,27 @@
                   <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
                 </BindingProperty>
               </BindingProperties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel7">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Nascimento:"/>
+              </Properties>
+              <AccessibilityProperties>
+                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Nascimento:"/>
+              </AccessibilityProperties>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="txtNascimento">
+              <BindingProperties>
+                <BindingProperty name="value" source="tblCliente" sourcePath="${selectedElement.dataNascimento}" target="txtNascimento" targetPath="value" updateStrategy="0" immediately="false">
+                  <Property name="converter" type="org.jdesktop.beansbinding.Converter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                    <ComponentRef name="converteData1"/>
+                  </Property>
+                </BindingProperty>
+              </BindingProperties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(maskData)"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="javax.swing.text.MaskFormatter maskData = null;&#xd;&#xa;try{&#xd;&#xa;maskData = new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;maskData.setPlaceholderCharacter(&apos;_&apos;);&#xd;&#xa;}catch(Exception e){&#xd;&#xa;System.out.println(&quot;Erro na mascara&quot;+e);&#xd;&#xa;}"/>
+              </AuxValues>
             </Component>
           </SubComponents>
         </Container>

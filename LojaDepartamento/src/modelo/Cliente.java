@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.beans.Transient;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Objects;
 
@@ -145,5 +147,9 @@ public class Cliente implements Pessoa{
         return true;
     }
 
-    
+    @Transient
+    public String getNascimentoFormatado() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(dataNascimento.getTime());
+    }
 }

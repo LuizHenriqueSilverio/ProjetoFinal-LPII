@@ -29,7 +29,7 @@ public class DAOCliente {
                 Cliente obj = new Cliente();
                 obj.setCodCliente(rs.getInt("codClientes"));
                 obj.setCpf(rs.getString("cpf"));
-                obj.setNome(rs.getString("nomeCliente"));
+                obj.setNome(rs.getString("nome"));
                 java.sql.Date dt = rs.getDate("dataNascimento");
                 Calendar c = Calendar.getInstance();
                 c.setTime(dt);

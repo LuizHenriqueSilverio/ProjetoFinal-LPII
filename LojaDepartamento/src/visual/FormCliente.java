@@ -18,7 +18,7 @@ public class FormCliente extends java.awt.Dialog {
     DAOCliente objDAOCliente = new DAOCliente();
     
     /**
-     * Creates new form FormCidade
+     * Creates new form FormCliente
      */
     public FormCliente(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -49,7 +49,11 @@ public class FormCliente extends java.awt.Dialog {
         if(linha < 0) {
             btnExcluir.setEnabled(false);
             txtCodigo.setText("");
+            txtNome.setText("");
+            txtCpf.setText("");
             txtTelefone.setText("");
+            txtEndereco.setText("");
+            txtNascimento.setText("");
         }else {
             btnExcluir.setEnabled(!editando);
         }
@@ -59,14 +63,18 @@ public class FormCliente extends java.awt.Dialog {
         btnAnterior.setEnabled(!editando);
         btnUltimo.setEnabled(!editando);
         
+        txtNome.setEnabled(editando);
+        txtCpf.setEnabled(editando);
         txtTelefone.setEnabled(editando);
+        txtEndereco.setEnabled(editando);
+        txtNascimento.setEnabled(editando);
         tblCliente.setEnabled(editando);
     }
     
     public boolean validaCampos() {
-        if(!(txtTelefone.getText().length() > 0)) {
-            JOptionPane.showMessageDialog(null, "Informe o nome do CPF!");
-            txtTelefone.requestFocus();
+        if(!(txtCpf.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe o CPF!");
+            txtCpf.requestFocus();
             return false;
         }
         return true;
@@ -80,7 +88,7 @@ public class FormCliente extends java.awt.Dialog {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        listCliente = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Cliente>())
+        listCliente = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList <Cliente>())
         ;
         converteData1 = new modelo.ConverteData();
         jPanel1 = new javax.swing.JPanel();
@@ -110,6 +118,15 @@ public class FormCliente extends java.awt.Dialog {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtEndereco = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        javax.swing.text.MaskFormatter maskData = null;
+        try{
+            maskData = new javax.swing.text.MaskFormatter("##/##/####");
+            maskData.setPlaceholderCharacter('_');
+        }catch(Exception e){
+            System.out.println("Erro na mascara"+e);
+        }
+        txtNascimento = new javax.swing.JFormattedTextField(maskData);
 
         setTitle("Cadastro de Cidades");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -171,23 +188,23 @@ public class FormCliente extends java.awt.Dialog {
         columnBinding.setColumnClass(Integer.class);
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpf}"));
-        columnBinding.setColumnName("CPF");
+        columnBinding.setColumnName("Cpf");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataNascimento}"));
-        columnBinding.setColumnName("Nascimento");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${telefone}"));
+        columnBinding.setColumnName("Telefone");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${endereco}"));
-        columnBinding.setColumnName("Endereço");
+        columnBinding.setColumnName("Endereco");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${telefone}"));
-        columnBinding.setColumnName("Telefone");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nascimentoFormatado}"));
+        columnBinding.setColumnName("Data Nascimento");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
@@ -204,7 +221,7 @@ public class FormCliente extends java.awt.Dialog {
 
         txtCodigo.setEditable(false);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codCidade}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codCliente}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
@@ -292,6 +309,12 @@ public class FormCliente extends java.awt.Dialog {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.endereco}"), txtEndereco, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
+        jLabel7.setText("Nascimento:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataNascimento}"), txtNascimento, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding.setConverter(converteData1);
+        bindingGroup.addBinding(binding);
+
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
         Dados.setLayout(DadosLayout);
         DadosLayout.setHorizontalGroup(
@@ -301,19 +324,29 @@ public class FormCliente extends java.awt.Dialog {
                 .addComponent(painelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 532, Short.MAX_VALUE))
             .addGroup(DadosLayout.createSequentialGroup()
                 .addGap(55, 55, 55)
-                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                    .addComponent(txtEndereco))
+                    .addGroup(DadosLayout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtNascimento))
+                    .addGroup(DadosLayout.createSequentialGroup()
+                        .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(DadosLayout.createSequentialGroup()
+                                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel1))
+                                .addGap(23, 23, 23))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DadosLayout.createSequentialGroup()
+                                .addComponent(jLabel6)
+                                .addGap(18, 18, 18)))
+                        .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtTelefone, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                            .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                            .addComponent(txtEndereco))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DadosLayout.setVerticalGroup(
@@ -339,10 +372,16 @@ public class FormCliente extends java.awt.Dialog {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(92, Short.MAX_VALUE))
+                .addContainerGap(54, Short.MAX_VALUE))
         );
+
+        jLabel7.getAccessibleContext().setAccessibleName("Nascimento:");
 
         painelAbas.addTab("Dados", Dados);
 
@@ -400,8 +439,8 @@ public class FormCliente extends java.awt.Dialog {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
        if(validaCampos()){
             int linhaSelecionada = tblCliente.getSelectedRow();
-            Cliente objCidade = listCliente.get(linhaSelecionada);
-            objDAOCliente.salvar(objCidade);
+            Cliente objCliente = listCliente.get(linhaSelecionada);
+            objDAOCliente.salvar(objCliente);
             atualizaTabela();
             trataEdicao(false);
        }
@@ -509,6 +548,7 @@ public class FormCliente extends java.awt.Dialog {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private java.util.List<Cliente> listCliente;
@@ -518,6 +558,7 @@ public class FormCliente extends java.awt.Dialog {
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCpf;
     private javax.swing.JTextField txtEndereco;
+    private javax.swing.JFormattedTextField txtNascimento;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
