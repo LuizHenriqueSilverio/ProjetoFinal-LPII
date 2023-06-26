@@ -16,7 +16,7 @@ public class Cliente implements Pessoa{
     private Integer codCliente;
     private String nome;
     private String cpf;
-    private String dataNascimento;
+    private Calendar dataNascimento;
     private String telefone;
     private String endereco;
     
@@ -24,7 +24,7 @@ public class Cliente implements Pessoa{
         
     }
     
-    public Cliente(String nome, String CPF, String dataNasc, String telefone, String endereco){
+    public Cliente(String nome, String CPF, Calendar dataNasc, String telefone, String endereco){
         this.nome = nome;
         this.cpf = CPF;
         this.dataNascimento = dataNasc;
@@ -67,14 +67,14 @@ public class Cliente implements Pessoa{
     /**
      * @return the dataNascimento
      */
-    public String getDataNascimento() {
+    public Calendar getDataNascimento() {
         return dataNascimento;
     }
 
     /**
      * @param dataNascimento the dataNascimento to set
      */
-    public void setDataNascimento(String dataNascimento) {
+    public void setDataNascimento(Calendar dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
 

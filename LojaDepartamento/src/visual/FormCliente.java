@@ -29,7 +29,7 @@ public class FormCliente extends java.awt.Dialog {
 
     public void atualizaTabela() {
         listCliente.clear();
-        listCliente.addAll(objDAOCliente.getLista());
+        listCliente.addAll(objDAOCliente.getListaCliente());
         int linha = listCliente.size() - 1;
         
         if(linha >= 0) {

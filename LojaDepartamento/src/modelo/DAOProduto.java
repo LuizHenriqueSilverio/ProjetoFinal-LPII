@@ -5,7 +5,12 @@
  */
 package modelo;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,22 +18,96 @@ import java.util.List;
  */
 public class DAOProduto {
        
-    public List<Produto> getLista() {
-        return Dados.listaProduto;    
+    public List<Produto> getListaProduto(){
+        String sql = "select * from produtos";
+        List<Produto> lista = new ArrayList<>();
+        try{
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Produto obj = new Produto();
+                obj.setCodProduto(rs.getInt("codProdutos"));
+                obj.setDescricao(rs.getString("descricao"));
+                obj.setPrecoCusto(rs.getDouble("precoCusto"));
+                obj.setPrecoVenda(rs.getDouble("precoVenda"));
+                lista.add(obj);
+            }
+            rs.close();
+            pst.close();
+        }catch(SQLException e){
+             JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+
+        }
+        return lista;
     }
     
     public boolean salvar(Produto obj) {
-        if(obj.getCodProduto()==  null){
-            Integer codigo = Dados.listaProduto.size() + 1;
-            obj.setCodProduto(codigo);
-            Dados.listaProduto.add(obj);
+        if(obj.getCodProduto()== null) {
+            return incluir(obj);
+        }else {
+            return alterar(obj);
         }
-        return true;
     }
     
-    public boolean remover(Produto obj) {
-        Dados.listaProduto.remove(obj);
-        return true;
+        public boolean incluir(Produto obj) {
+        String sql = "insert into produtos (descricao,precoCusto,precoVenda) values(?,?,?)";
+        try {
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            pst.setString(1, obj.getDescricao());
+            pst.setDouble(2, obj.getPrecoCusto());
+            pst.setDouble(3, obj.getPrecoVenda());
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Produto cadastrado!");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não cadastrado!");
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+
+        }
+        return false;
     }
+        
+    public boolean alterar(Produto obj) {
+        String sql = "update produtos set descricao=?, precoCusto=?, precoVenda=? where codProdutos=?";
+        try {
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            pst.setString(1, obj.getDescricao());
+            pst.setDouble(2, obj.getPrecoCusto());
+            pst.setDouble(3, obj.getPrecoVenda());
+            pst.setInt(4, obj.getCodProduto());
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Produto alterado!");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não alterado!");
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+        }
+        return false;
+    }        
+    
+    public boolean remover(Produto obj) {
+        String sql = "delete from produtos where codProdutos=?";
+        try {
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            pst.setInt(1, obj.getCodProduto());
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Produto excluído!");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Produto não excluído!");
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+
+        }
+        return false;
+    }    
     
 }

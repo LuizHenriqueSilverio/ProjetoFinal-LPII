@@ -5,7 +5,13 @@
  */
 package modelo;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -13,23 +19,105 @@ import java.util.List;
  */
 public class DAOCliente {
     
-    public List<Cliente> getLista() {
-        return Dados.listaCliente;
-        
+    public List<Cliente> getListaCliente(){
+        String sql = "select * from clientes";
+        List<Cliente> lista = new ArrayList<>();
+        try{
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            ResultSet rs = pst.executeQuery();
+            while(rs.next()){
+                Cliente obj = new Cliente();
+                obj.setCodCliente(rs.getInt("codClientes"));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setNome(rs.getString("nomeCliente"));
+                java.sql.Date dt = rs.getDate("dataNascimento");
+                Calendar c = Calendar.getInstance();
+                c.setTime(dt);
+                obj.setDataNascimento(c);
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setEndereco(rs.getString("endereco"));
+                lista.add(obj);
+            }
+            rs.close();
+            pst.close();
+        }catch(SQLException e){
+             JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+
+        }
+        return lista;
     }
     
     public boolean salvar(Cliente obj) {
-        if(obj.getCodCliente()==  null){
-            Integer codigo = Dados.listaCliente.size() + 1;
-            obj.setCodCliente(codigo);
-            Dados.listaCliente.add(obj);
+        if(obj.getCodCliente() == null) {
+            return incluir(obj);
+        }else {
+            return alterar(obj);
         }
-        return true;
+    }
+    
+    public boolean incluir(Cliente obj) {
+        String sql = "insert into clientes (cpf,nome,dataNascimento,telefone,endereco) values(?,?,?,?,?)";
+        try {
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            pst.setString(1, obj.getCpf());
+            pst.setString(2, obj.getNome());
+            pst.setDate(3, new java.sql.Date(obj.getDataNascimento().getTimeInMillis()));
+            pst.setString(4, obj.getTelefone());
+            pst.setString(5, obj.getEndereco());
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Cliente cadastrado!");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente não cadastrado!");
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+
+        }
+        return false;
+    }
+    
+    public boolean alterar(Cliente obj) {
+        String sql = "update clientes set cpf=?, nome=?, dataNascimento=?, telefone=?, endereco=? where codClientes=?";
+        try {
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            pst.setString(1, obj.getCpf());
+            pst.setString(2, obj.getNome());
+            pst.setDate(3, new java.sql.Date(obj.getDataNascimento().getTimeInMillis()));
+            pst.setString(4, obj.getTelefone());
+            pst.setString(5, obj.getEndereco());
+            pst.setInt(6, obj.getCodCliente());
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Cliente alterado!");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente não alterado!");
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+        }
+        return false;
     }
     
     public boolean remover(Cliente obj) {
-        Dados.listaCliente.remove(obj);
-        return true;
+        String sql = "delete from clientes where codClientes=?";
+        try {
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            pst.setInt(1, obj.getCodCliente());
+            if (pst.executeUpdate() > 0) {
+                JOptionPane.showMessageDialog(null, "Cliente excluído!");
+                return true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Cliente não excluído!");
+                return false;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+
+        }
+        return false;
     }
-    
+
 }

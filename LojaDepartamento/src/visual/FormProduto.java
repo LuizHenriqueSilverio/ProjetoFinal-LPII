@@ -18,8 +18,6 @@ import modelo.Cliente;
 public class FormProduto extends java.awt.Dialog {
 
     DAOProduto objDAOProduto = new DAOProduto();
-    DAOCliente objDAOCliente = new DAOCliente();
-         
     
     /**
      * Creates new form FormCidade
@@ -29,13 +27,11 @@ public class FormProduto extends java.awt.Dialog {
         initComponents();
         atualizaTabela();
         trataEdicao(false);
-        listCliente.clear();
-        listCliente.addAll(objDAOCliente.getLista());
     }
 
     public void atualizaTabela() {
         listProduto.clear();
-        listProduto.addAll(objDAOProduto.getLista());
+        listProduto.addAll(objDAOProduto.getListaProduto());
         int linha = listProduto.size() - 1;
         
         if(linha >= 0) {
