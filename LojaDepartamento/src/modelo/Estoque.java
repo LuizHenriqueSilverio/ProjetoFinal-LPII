@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.Calendar;
+
 /**
  *
  * @author Gabriel Pegoraro
@@ -13,9 +15,14 @@ public class Estoque {
     private Integer codEstoque;
     private Produto produto;
     private double quantidade;
-    private String dataValidade;
+    private Calendar dataValidade;
+    private String lote;
     
-    public Estoque(Produto produto, int qtd, String dataVal){
+    public Estoque() {
+    
+    }
+    
+    public Estoque(Produto produto, int qtd, Calendar dataVal){
         this.produto = produto;
         this.quantidade = qtd;
         this.dataValidade = dataVal;
@@ -46,21 +53,21 @@ public class Estoque {
     /**
      * @param quantidade the quantidade to set
      */
-    public void setQuantidade(int quantidade) {
+    public void setQuantidade(double quantidade) {
         this.quantidade = quantidade;
     }
 
     /**
      * @return the dataValidade
      */
-    public String getDataValidade() {
+    public Calendar getDataValidade() {
         return dataValidade;
     }
 
     /**
      * @param dataValidade the dataValidade to set
      */
-    public void setDataValidade(String dataValidade) {
+    public void setDataValidade(Calendar dataValidade) {
         this.dataValidade = dataValidade;
     }
 
@@ -76,6 +83,20 @@ public class Estoque {
      */
     public void setCodEstoque(Integer codEstoque) {
         this.codEstoque = codEstoque;
+    }
+
+    /**
+     * @return the lote
+     */
+    public String getLote() {
+        return lote;
+    }
+
+    /**
+     * @param lote the lote to set
+     */
+    public void setLote(String lote) {
+        this.lote = lote;
     }
     
 }

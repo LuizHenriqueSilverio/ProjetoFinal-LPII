@@ -30,9 +30,9 @@ public class Conexao {
                 Class.forName(driver);
                 con = DriverManager.getConnection(banco, usuario, senha);
             }catch(ClassNotFoundException ex){
-                System.out.println("Não encontrou o driver: "+ex.getMessage());
+                System.out.println("Não encontrou o driver: " + ex.getMessage());
             }catch(SQLException ex){
-                System.out.println("Erro na conexão: "+ex.getMessage());
+                System.out.println("Erro na conexão: " + ex.getMessage());
             }
         }
         return con;

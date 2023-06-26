@@ -82,6 +82,7 @@ public class FormCliente extends java.awt.Dialog {
 
         listCliente = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Cliente>())
         ;
+        converteData1 = new modelo.ConverteData();
         jPanel1 = new javax.swing.JPanel();
         btnPrimeiro = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
@@ -108,7 +109,7 @@ public class FormCliente extends java.awt.Dialog {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtEndereco = new javax.swing.JTextField();
 
         setTitle("Cadastro de Cidades");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -288,7 +289,7 @@ public class FormCliente extends java.awt.Dialog {
 
         jLabel6.setText("Endereço:");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.endereco}"), jTextField1, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.endereco}"), txtEndereco, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
@@ -312,7 +313,7 @@ public class FormCliente extends java.awt.Dialog {
                     .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCpf, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                    .addComponent(jTextField1))
+                    .addComponent(txtEndereco))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         DadosLayout.setVerticalGroup(
@@ -339,7 +340,7 @@ public class FormCliente extends java.awt.Dialog {
                 .addGap(18, 18, 18)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(92, Short.MAX_VALUE))
         );
 
@@ -392,7 +393,7 @@ public class FormCliente extends java.awt.Dialog {
         listCliente.add((Cliente) new Cliente()); // cria um objeto e uma linha na tabela
         int linha = listCliente.size() - 1;
         tblCliente.setRowSelectionInterval(linha, linha); //seleciona a linha
-        txtTelefone.requestFocus(); //caixa de texto com o nome da cidade recebe o foco
+        txtNome.requestFocus(); //caixa de texto com o nome da cidade recebe o foco
         trataEdicao(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -502,6 +503,7 @@ public class FormCliente extends java.awt.Dialog {
     private javax.swing.JButton btnProximo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUltimo;
+    private modelo.ConverteData converteData1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -509,13 +511,13 @@ public class FormCliente extends java.awt.Dialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private java.util.List<Cliente> listCliente;
     private javax.swing.JTabbedPane painelAbas;
     private javax.swing.JPanel painelAcoes;
     private javax.swing.JTable tblCliente;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCpf;
+    private javax.swing.JTextField txtEndereco;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtTelefone;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;

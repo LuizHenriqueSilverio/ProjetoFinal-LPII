@@ -110,4 +110,24 @@ public class DAOProduto {
         return false;
     }    
     
+     public Produto localizarProduto(Integer id) {
+        String sql = "select * from produtos where codProdutos=?";
+        Produto obj = new Produto();
+        try {
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                obj.setCodProduto(rs.getInt("codProdutos"));
+                obj.setDescricao(rs.getString("descricao"));
+                obj.setPrecoCusto(rs.getDouble("precoCusto"));
+                obj.setPrecoVenda(rs.getDouble("precoVenda"));
+                return obj;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+
+        }
+        return null;
+    }
 }

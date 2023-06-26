@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Estoque;
 import modelo.DAOProduto;
-import modelo.DAOCliente;
+import modelo.DAOEstoque;
 import modelo.Produto;
 /**
  *
@@ -18,7 +18,7 @@ import modelo.Produto;
 public class FormEstoque extends java.awt.Dialog {
 
     DAOProduto objDAOProduto = new DAOProduto();
-    DAOCliente objDAOCliente = new DAOCliente();
+    DAOEstoque objDAOEstoque = new DAOEstoque();
          
     
     /**
@@ -30,12 +30,12 @@ public class FormEstoque extends java.awt.Dialog {
         atualizaTabela();
         trataEdicao(false);
         listEstoque.clear();
-        listEstoque.addAll(objDAOCliente.getLista());
+        listEstoque.addAll(objDAOEstoque.getListaEstoque());
     }
 
     public void atualizaTabela() {
         listProduto.clear();
-        listProduto.addAll(objDAOProduto.getLista());
+        listProduto.addAll(objDAOProduto.getListaProduto());
         int linha = listProduto.size() - 1;
         
         if(linha >= 0) {
