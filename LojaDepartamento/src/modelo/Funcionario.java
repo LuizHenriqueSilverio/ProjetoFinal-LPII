@@ -9,7 +9,9 @@ package modelo;
  *
  * @author luizh
  */
-   public class Funcionario implements Pessoa{
+public class Funcionario implements Pessoa{
+    
+    Integer codFuncionario;
     private String nome;
     private String cpf;
     private String dataAdmissao;
@@ -129,5 +131,19 @@ package modelo;
      */
     public void setCargo(String cargo) {
         this.cargo = cargo;
+    }
+
+    /**
+     * @return the codFuncionario
+     */
+    public Integer getCodFuncionario() {
+        return codFuncionario;
+    }
+
+    /**
+     * @param codFuncionario the codFuncionario to set
+     */
+    public void setCodFuncionario(Integer codFuncionario) {
+        this.codFuncionario = codFuncionario;
     }
 }

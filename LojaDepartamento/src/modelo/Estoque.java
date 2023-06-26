@@ -10,6 +10,7 @@ package modelo;
  */
 public class Estoque {
     
+    private Integer codEstoque;
     private Produto produto;
     private double quantidade;
     private String dataValidade;
@@ -61,6 +62,20 @@ public class Estoque {
      */
     public void setDataValidade(String dataValidade) {
         this.dataValidade = dataValidade;
+    }
+
+    /**
+     * @return the codEstoque
+     */
+    public Integer getCodEstoque() {
+        return codEstoque;
+    }
+
+    /**
+     * @param codEstoque the codEstoque to set
+     */
+    public void setCodEstoque(Integer codEstoque) {
+        this.codEstoque = codEstoque;
     }
     
 }

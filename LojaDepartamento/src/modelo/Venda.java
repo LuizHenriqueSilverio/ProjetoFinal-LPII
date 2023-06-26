@@ -10,6 +10,8 @@ package modelo;
  * @author luizh
  */
 public class Venda {
+    
+    private Integer codVenda;
     private Cliente cliente;
     private Produto produto;
     private double qtd;
@@ -108,6 +110,20 @@ public class Venda {
      */
     public void setDataVenda(String dataVenda) {
         this.dataVenda = dataVenda;
+    }
+
+    /**
+     * @return the codVenda
+     */
+    public Integer getCodVenda() {
+        return codVenda;
+    }
+
+    /**
+     * @param codVenda the codVenda to set
+     */
+    public void setCodVenda(Integer codVenda) {
+        this.codVenda = codVenda;
     }
     
     
