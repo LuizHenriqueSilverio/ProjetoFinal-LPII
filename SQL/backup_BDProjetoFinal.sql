@@ -1,13 +1,15 @@
 -- --------------------------------------------------------
 -- Servidor:                     127.0.0.1
--- Versão do servidor:           10.4.20-MariaDB - mariadb.org binary distribution
+-- Versão do servidor:           10.4.28-MariaDB - mariadb.org binary distribution
 -- OS do Servidor:               Win64
--- HeidiSQL Versão:              11.3.0.6295
+-- HeidiSQL Versão:              12.5.0.6677
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
@@ -15,7 +17,7 @@
 
 -- Copiando estrutura do banco de dados para lojadepartamento
 DROP DATABASE IF EXISTS `lojadepartamento`;
-CREATE DATABASE IF NOT EXISTS `lojadepartamento` /*!40100 DEFAULT CHARACTER SET utf8 */;
+CREATE DATABASE IF NOT EXISTS `lojadepartamento` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci */;
 USE `lojadepartamento`;
 
 -- Copiando estrutura para tabela lojadepartamento.clientes
@@ -23,15 +25,16 @@ DROP TABLE IF EXISTS `clientes`;
 CREATE TABLE IF NOT EXISTS `clientes` (
   `codCLIENTES` int(11) NOT NULL AUTO_INCREMENT,
   `cpf` varchar(50) NOT NULL,
+  `nome` varchar(200) NOT NULL,
   `dataNascimento` date DEFAULT NULL,
   `telefone` varchar(100) DEFAULT NULL,
   `endereco` varchar(200) DEFAULT NULL,
   PRIMARY KEY (`codCLIENTES`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Copiando dados para a tabela lojadepartamento.clientes: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `clientes` DISABLE KEYS */;
-/*!40000 ALTER TABLE `clientes` ENABLE KEYS */;
+-- Copiando dados para a tabela lojadepartamento.clientes: ~1 rows (aproximadamente)
+INSERT INTO `clientes` (`codCLIENTES`, `cpf`, `nome`, `dataNascimento`, `telefone`, `endereco`) VALUES
+	(2, '123.456.789-10', 'Gabriel Caproni', '2003-08-14', '(35) 4002-8922', 'Rua Pica-Pau, nº 48, Centro, Carvalhópolis-MG');
 
 -- Copiando estrutura para tabela lojadepartamento.estoque
 DROP TABLE IF EXISTS `estoque`;
@@ -44,11 +47,9 @@ CREATE TABLE IF NOT EXISTS `estoque` (
   PRIMARY KEY (`codESTOQUE`,`PRODUTOS_codPRODUTOS`),
   KEY `fk_ESTOQUE_PRODUTOS1_idx` (`PRODUTOS_codPRODUTOS`),
   CONSTRAINT `fk_ESTOQUE_PRODUTOS1` FOREIGN KEY (`PRODUTOS_codPRODUTOS`) REFERENCES `produtos` (`codPRODUTOS`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Copiando dados para a tabela lojadepartamento.estoque: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `estoque` DISABLE KEYS */;
-/*!40000 ALTER TABLE `estoque` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela lojadepartamento.funcionarios
 DROP TABLE IF EXISTS `funcionarios`;
@@ -62,11 +63,9 @@ CREATE TABLE IF NOT EXISTS `funcionarios` (
   `salario` double NOT NULL,
   `cargo` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`codFUNCIONARIOS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Copiando dados para a tabela lojadepartamento.funcionarios: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `funcionarios` DISABLE KEYS */;
-/*!40000 ALTER TABLE `funcionarios` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela lojadepartamento.produtos
 DROP TABLE IF EXISTS `produtos`;
@@ -76,11 +75,9 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `precoCusto` double NOT NULL,
   `precoVenda` double NOT NULL,
   PRIMARY KEY (`codPRODUTOS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Copiando dados para a tabela lojadepartamento.produtos: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `produtos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `produtos` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela lojadepartamento.venda
 DROP TABLE IF EXISTS `venda`;
@@ -95,11 +92,9 @@ CREATE TABLE IF NOT EXISTS `venda` (
   KEY `fk_VENDA_CLIENTES1_idx` (`CLIENTES_codCLIENTES`),
   CONSTRAINT `fk_VENDA_CLIENTES1` FOREIGN KEY (`CLIENTES_codCLIENTES`) REFERENCES `clientes` (`codCLIENTES`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_VENDA_FUNCIONARIOS1` FOREIGN KEY (`FUNCIONARIOS_codFUNCIONARIOS`) REFERENCES `funcionarios` (`codFUNCIONARIOS`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Copiando dados para a tabela lojadepartamento.venda: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `venda` DISABLE KEYS */;
-/*!40000 ALTER TABLE `venda` ENABLE KEYS */;
 
 -- Copiando estrutura para tabela lojadepartamento.vendasprodutos
 DROP TABLE IF EXISTS `vendasprodutos`;
@@ -112,12 +107,11 @@ CREATE TABLE IF NOT EXISTS `vendasprodutos` (
   KEY `fk_VENDA_has_PRODUTOS_VENDA_idx` (`VENDA_codVENDA`),
   CONSTRAINT `fk_VENDA_has_PRODUTOS_PRODUTOS1` FOREIGN KEY (`PRODUTOS_codPRODUTOS`) REFERENCES `produtos` (`codPRODUTOS`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_VENDA_has_PRODUTOS_VENDA` FOREIGN KEY (`VENDA_codVENDA`) REFERENCES `venda` (`codVENDA`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Copiando dados para a tabela lojadepartamento.vendasprodutos: ~0 rows (aproximadamente)
-/*!40000 ALTER TABLE `vendasprodutos` DISABLE KEYS */;
-/*!40000 ALTER TABLE `vendasprodutos` ENABLE KEYS */;
 
+/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
