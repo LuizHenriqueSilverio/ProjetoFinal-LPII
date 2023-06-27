@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `clientes` (
   PRIMARY KEY (`codCLIENTES`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Copiando dados para a tabela lojadepartamento.clientes: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela lojadepartamento.clientes: ~0 rows (aproximadamente)
 INSERT INTO `clientes` (`codCLIENTES`, `cpf`, `nome`, `dataNascimento`, `telefone`, `endereco`) VALUES
 	(2, '123.456.789-10', 'Gabriel Caproni', '2003-08-14', '(35) 4002-8922', 'Rua Pica-Pau, nº 48, Centro, Carvalhópolis-MG');
 
@@ -41,15 +41,17 @@ DROP TABLE IF EXISTS `estoque`;
 CREATE TABLE IF NOT EXISTS `estoque` (
   `codESTOQUE` int(11) NOT NULL AUTO_INCREMENT,
   `quantidade` double NOT NULL,
-  `dataValidade` date NOT NULL,
+  `dataValidade` date DEFAULT NULL,
   `lote` varchar(200) DEFAULT NULL,
   `PRODUTOS_codPRODUTOS` int(11) NOT NULL,
   PRIMARY KEY (`codESTOQUE`,`PRODUTOS_codPRODUTOS`),
   KEY `fk_ESTOQUE_PRODUTOS1_idx` (`PRODUTOS_codPRODUTOS`),
   CONSTRAINT `fk_ESTOQUE_PRODUTOS1` FOREIGN KEY (`PRODUTOS_codPRODUTOS`) REFERENCES `produtos` (`codPRODUTOS`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Copiando dados para a tabela lojadepartamento.estoque: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela lojadepartamento.estoque: ~1 rows (aproximadamente)
+INSERT INTO `estoque` (`codESTOQUE`, `quantidade`, `dataValidade`, `lote`, `PRODUTOS_codPRODUTOS`) VALUES
+	(1, 100, NULL, '0001', 1);
 
 -- Copiando estrutura para tabela lojadepartamento.funcionarios
 DROP TABLE IF EXISTS `funcionarios`;
@@ -63,9 +65,11 @@ CREATE TABLE IF NOT EXISTS `funcionarios` (
   `salario` double NOT NULL,
   `cargo` varchar(100) NOT NULL DEFAULT '',
   PRIMARY KEY (`codFUNCIONARIOS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Copiando dados para a tabela lojadepartamento.funcionarios: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela lojadepartamento.funcionarios: ~1 rows (aproximadamente)
+INSERT INTO `funcionarios` (`codFUNCIONARIOS`, `nome`, `cpf`, `dataAdmissao`, `dataRescisao`, `departamento`, `salario`, `cargo`) VALUES
+	(2, 'Guilherme', '222.222.222-22', '2023-02-01', NULL, 'Vendas', 5500, 'Gerente');
 
 -- Copiando estrutura para tabela lojadepartamento.produtos
 DROP TABLE IF EXISTS `produtos`;
@@ -75,9 +79,11 @@ CREATE TABLE IF NOT EXISTS `produtos` (
   `precoCusto` double NOT NULL,
   `precoVenda` double NOT NULL,
   PRIMARY KEY (`codPRODUTOS`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
 -- Copiando dados para a tabela lojadepartamento.produtos: ~0 rows (aproximadamente)
+INSERT INTO `produtos` (`codPRODUTOS`, `descricao`, `precoCusto`, `precoVenda`) VALUES
+	(1, 'Notebook Dell i5, 8GB RAM, SSD 512GB, Tela 17"', 2750.75, 3440.85);
 
 -- Copiando estrutura para tabela lojadepartamento.venda
 DROP TABLE IF EXISTS `venda`;
@@ -92,9 +98,11 @@ CREATE TABLE IF NOT EXISTS `venda` (
   KEY `fk_VENDA_CLIENTES1_idx` (`CLIENTES_codCLIENTES`),
   CONSTRAINT `fk_VENDA_CLIENTES1` FOREIGN KEY (`CLIENTES_codCLIENTES`) REFERENCES `clientes` (`codCLIENTES`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `fk_VENDA_FUNCIONARIOS1` FOREIGN KEY (`FUNCIONARIOS_codFUNCIONARIOS`) REFERENCES `funcionarios` (`codFUNCIONARIOS`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
 
--- Copiando dados para a tabela lojadepartamento.venda: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela lojadepartamento.venda: ~1 rows (aproximadamente)
+INSERT INTO `venda` (`codVENDA`, `valorVenda`, `dataVenda`, `FUNCIONARIOS_codFUNCIONARIOS`, `CLIENTES_codCLIENTES`) VALUES
+	(1, 3440.85, '2023-04-15', 2, 2);
 
 -- Copiando estrutura para tabela lojadepartamento.vendasprodutos
 DROP TABLE IF EXISTS `vendasprodutos`;
@@ -102,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `vendasprodutos` (
   `VENDA_codVENDA` int(11) NOT NULL,
   `PRODUTOS_codPRODUTOS` int(11) NOT NULL,
   `quantidade` double NOT NULL,
+  `codVendasProdutos` int(11) DEFAULT NULL,
   PRIMARY KEY (`VENDA_codVENDA`,`PRODUTOS_codPRODUTOS`),
   KEY `fk_VENDA_has_PRODUTOS_PRODUTOS1_idx` (`PRODUTOS_codPRODUTOS`),
   KEY `fk_VENDA_has_PRODUTOS_VENDA_idx` (`VENDA_codVENDA`),

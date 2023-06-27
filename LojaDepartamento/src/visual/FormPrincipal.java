@@ -36,6 +36,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         menuFuncionario = new javax.swing.JMenuItem();
         menuEstoque = new javax.swing.JMenuItem();
         menuFuncionarios = new javax.swing.JMenuItem();
+        menuVenda = new javax.swing.JMenu();
         menuVendas = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuSobre = new javax.swing.JMenuItem();
@@ -77,15 +78,19 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(menuFuncionarios);
 
-        menuVendas.setText("Vendas");
+        barraMenu.add(menuCadastro);
+
+        menuVenda.setText("Vendas");
+
+        menuVendas.setText("Cadastro");
         menuVendas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuVendasActionPerformed(evt);
             }
         });
-        menuCadastro.add(menuVendas);
+        menuVenda.add(menuVendas);
 
-        barraMenu.add(menuCadastro);
+        barraMenu.add(menuVenda);
 
         menuAjuda.setText("Ajuda");
 
@@ -204,6 +209,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuFuncionario;
     private javax.swing.JMenuItem menuFuncionarios;
     private javax.swing.JMenuItem menuSobre;
+    private javax.swing.JMenu menuVenda;
     private javax.swing.JMenuItem menuVendas;
     // End of variables declaration//GEN-END:variables
 }
