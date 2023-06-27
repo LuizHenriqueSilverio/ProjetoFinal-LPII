@@ -109,6 +109,7 @@ public class FormEstoque extends java.awt.Dialog {
         listProduto = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Produto>())
         ;
         listEstoque = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Estoque>());
+        converteData1 = new modelo.ConverteData();
         jPanel1 = new javax.swing.JPanel();
         btnPrimeiro = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
@@ -134,7 +135,14 @@ public class FormEstoque extends java.awt.Dialog {
         btnExcluir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtDataValidade = new javax.swing.JFormattedTextField();
+        javax.swing.text.MaskFormatter maskData = null;
+        try {
+            maskData = new javax.swing.text.MaskFormatter("##/##/####");
+            maskData.setPlaceholderCharacter('_');
+        }catch(Exception e) {
+            System.out.println("Erro: " + e);
+        }
+        txtDataValidade = new javax.swing.JFormattedTextField(maskData);
         txtLote = new javax.swing.JTextField();
 
         setTitle("Cadastro de Estoque");
@@ -193,20 +201,25 @@ public class FormEstoque extends java.awt.Dialog {
 
         org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listEstoque, tblEstoque);
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codEstoque}"));
-        columnBinding.setColumnName("Cod Estoque");
+        columnBinding.setColumnName("Código");
         columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${produto}"));
         columnBinding.setColumnName("Produto");
         columnBinding.setColumnClass(modelo.Produto.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${quantidade}"));
         columnBinding.setColumnName("Quantidade");
         columnBinding.setColumnClass(Double.class);
+        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${lote}"));
         columnBinding.setColumnName("Lote");
         columnBinding.setColumnClass(String.class);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataValidade}"));
-        columnBinding.setColumnName("Data Validade");
-        columnBinding.setColumnClass(java.util.Calendar.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${validadeFormatado}"));
+        columnBinding.setColumnName("Validade");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane2.setViewportView(tblEstoque);
@@ -241,6 +254,8 @@ public class FormEstoque extends java.awt.Dialog {
             }
         });
 
+        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listProduto, cbxProduto);
+        bindingGroup.addBinding(jComboBoxBinding);
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblEstoque, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.produto}"), cbxProduto, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
@@ -291,9 +306,8 @@ public class FormEstoque extends java.awt.Dialog {
 
         jLabel6.setText("Lote:");
 
-        txtDataValidade.setText("");
-
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblEstoque, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataValidade}"), txtDataValidade, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding.setConverter(converteData1);
         bindingGroup.addBinding(binding);
 
         txtDataValidade.addActionListener(new java.awt.event.ActionListener() {
@@ -301,6 +315,9 @@ public class FormEstoque extends java.awt.Dialog {
                 txtDataValidadeActionPerformed(evt);
             }
         });
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblEstoque, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.lote}"), txtLote, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
         Dados.setLayout(DadosLayout);
@@ -321,8 +338,8 @@ public class FormEstoque extends java.awt.Dialog {
                 .addGap(71, 71, 71)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbxProduto, 0, 218, Short.MAX_VALUE)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                    .addComponent(cbxProduto, 0, 331, Short.MAX_VALUE)
+                    .addComponent(txtQuantidade)
                     .addComponent(txtLote)
                     .addComponent(txtDataValidade))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -332,30 +349,27 @@ public class FormEstoque extends java.awt.Dialog {
             .addGroup(DadosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(painelAcoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(11, 11, 11)
+                    .addComponent(jLabel1)
+                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(15, 15, 15)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbxProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(7, 7, 7)
+                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2))
                 .addGap(18, 18, 18)
-                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(DadosLayout.createSequentialGroup()
-                        .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6))
-                    .addGroup(DadosLayout.createSequentialGroup()
-                        .addGap(38, 38, 38)
-                        .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtDataValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))))
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtLote, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6))
+                .addGap(18, 18, 18)
+                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel4)
+                    .addComponent(txtDataValidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(114, Short.MAX_VALUE))
         );
 
         painelAbas.addTab("Dados", Dados);
@@ -515,6 +529,7 @@ public class FormEstoque extends java.awt.Dialog {
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUltimo;
     private javax.swing.JComboBox<String> cbxProduto;
+    private modelo.ConverteData converteData1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

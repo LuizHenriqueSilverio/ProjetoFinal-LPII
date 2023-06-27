@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.Calendar;
+
 /**
  *
  * @author luizh
@@ -14,11 +16,15 @@ public class Funcionario implements Pessoa{
     Integer codFuncionario;
     private String nome;
     private String cpf;
-    private String dataAdmissao;
-    private String dataRescisao;
+    private Calendar dataAdmissao;
+    private Calendar dataRescisao;
     private String departamento;
     private String cargo;
     private double salario;
+    
+    public Funcionario() {
+        
+    }
 
     public Funcionario(String nome, String cpf, String dep, double salario) {
         this.nome = nome;
@@ -62,28 +68,28 @@ public class Funcionario implements Pessoa{
     /**
      * @return the dataAdmissao
      */
-    public String getDataAdmissao() {
+    public Calendar getDataAdmissao() {
         return dataAdmissao;
     }
 
     /**
      * @param dataAdmissao the dataAdmissao to set
      */
-    public void setDataAdmissao(String dataAdmissao) {
+    public void setDataAdmissao(Calendar dataAdmissao) {
         this.dataAdmissao = dataAdmissao;
     }
 
     /**
      * @return the dataRescisao
      */
-    public String getDataRescisao() {
+    public Calendar getDataRescisao() {
         return dataRescisao;
     }
 
     /**
      * @param dataRescisao the dataRescisao to set
      */
-    public void setDataRescisao(String dataRescisao) {
+    public void setDataRescisao(Calendar dataRescisao) {
         this.dataRescisao = dataRescisao;
     }
 

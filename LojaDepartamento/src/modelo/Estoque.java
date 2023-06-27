@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.beans.Transient;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -99,4 +101,9 @@ public class Estoque {
         this.lote = lote;
     }
     
+    @Transient
+    public String getValidadeFormatado() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(dataValidade.getTime());
+    }
 }
