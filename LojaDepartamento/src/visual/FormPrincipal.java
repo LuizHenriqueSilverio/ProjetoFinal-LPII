@@ -34,6 +34,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         menuCadastro = new javax.swing.JMenu();
         menuCidade = new javax.swing.JMenuItem();
         menuFuncionario = new javax.swing.JMenuItem();
+        menuEstoque = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuSobre = new javax.swing.JMenuItem();
 
@@ -57,6 +58,14 @@ public class FormPrincipal extends javax.swing.JFrame {
             }
         });
         menuCadastro.add(menuFuncionario);
+
+        menuEstoque.setText("Estoque");
+        menuEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuEstoqueActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(menuEstoque);
 
         barraMenu.add(menuCadastro);
 
@@ -109,6 +118,10 @@ public class FormPrincipal extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_menuFuncionarioActionPerformed
 
+    private void menuEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEstoqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_menuEstoqueActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -152,6 +165,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuItem menuCidade;
+    private javax.swing.JMenuItem menuEstoque;
     private javax.swing.JMenuItem menuFuncionario;
     private javax.swing.JMenuItem menuSobre;
     // End of variables declaration//GEN-END:variables
