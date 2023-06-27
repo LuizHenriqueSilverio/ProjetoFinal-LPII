@@ -23,7 +23,7 @@ public class DAOVenda {
     DAOCliente daoCliente = new DAOCliente();
     
     public List<Venda> getListaVenda(){
-        String sql = "select * from funcionarios";
+        String sql = "select * from venda";
         List<Venda> lista = new ArrayList<>();
         try{
             PreparedStatement pst = Conexao.getPreparedStatement(sql);
@@ -33,7 +33,7 @@ public class DAOVenda {
                 obj.setCodVenda(rs.getInt("codVenda"));
                 obj.setValorVenda(rs.getDouble("valorVenda"));
                 
-                java.sql.Date dt = rs.getDate("dataNascimento");
+                java.sql.Date dt = rs.getDate("dataVenda");
                 Calendar c = Calendar.getInstance();
                 c.setTime(dt);
                 

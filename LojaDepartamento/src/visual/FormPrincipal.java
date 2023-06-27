@@ -35,6 +35,7 @@ public class FormPrincipal extends javax.swing.JFrame {
         menuCidade = new javax.swing.JMenuItem();
         menuFuncionario = new javax.swing.JMenuItem();
         menuEstoque = new javax.swing.JMenuItem();
+        menuFuncionarios = new javax.swing.JMenuItem();
         menuVendas = new javax.swing.JMenuItem();
         menuAjuda = new javax.swing.JMenu();
         menuSobre = new javax.swing.JMenuItem();
@@ -68,7 +69,15 @@ public class FormPrincipal extends javax.swing.JFrame {
         });
         menuCadastro.add(menuEstoque);
 
-        menuVendas.setText("Funcionários");
+        menuFuncionarios.setText("Funcionários");
+        menuFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuFuncionariosActionPerformed(evt);
+            }
+        });
+        menuCadastro.add(menuFuncionarios);
+
+        menuVendas.setText("Vendas");
         menuVendas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 menuVendasActionPerformed(evt);
@@ -134,8 +143,15 @@ public class FormPrincipal extends javax.swing.JFrame {
         form.setVisible(true);
     }//GEN-LAST:event_menuEstoqueActionPerformed
 
-    private void menuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVendasActionPerformed
+    private void menuFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuFuncionariosActionPerformed
         FormFuncionario form = new FormFuncionario(this, true);
+        form.setLocationRelativeTo(null);
+        form.setResizable(false);
+        form.setVisible(true);
+    }//GEN-LAST:event_menuFuncionariosActionPerformed
+
+    private void menuVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuVendasActionPerformed
+        FormVenda form = new FormVenda(this, true);
         form.setLocationRelativeTo(null);
         form.setResizable(false);
         form.setVisible(true);
@@ -186,6 +202,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem menuCidade;
     private javax.swing.JMenuItem menuEstoque;
     private javax.swing.JMenuItem menuFuncionario;
+    private javax.swing.JMenuItem menuFuncionarios;
     private javax.swing.JMenuItem menuSobre;
     private javax.swing.JMenuItem menuVendas;
     // End of variables declaration//GEN-END:variables

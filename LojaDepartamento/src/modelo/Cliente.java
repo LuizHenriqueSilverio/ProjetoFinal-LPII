@@ -152,4 +152,9 @@ public class Cliente implements Pessoa{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(dataNascimento.getTime());
     }
+    
+    @Override
+    public String toString() {
+        return nome + "; CPF: " + cpf;
+    }
 }

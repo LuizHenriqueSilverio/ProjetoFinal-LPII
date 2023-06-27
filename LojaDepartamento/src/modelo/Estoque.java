@@ -103,7 +103,11 @@ public class Estoque {
     
     @Transient
     public String getValidadeFormatado() {
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        return sdf.format(dataValidade.getTime());
+        if(dataValidade != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+            return sdf.format(dataValidade.getTime());
+        }else {
+            return "Sem Data de Validade";
+        }
     }
 }

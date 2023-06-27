@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.beans.Transient;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -15,8 +17,6 @@ public class Venda {
     
     private Integer codVenda;
     private Cliente cliente;
-    private Produto produto;
-    private double qtd;
     private Funcionario funcionario;
     private double valorVenda;
     private Calendar dataVenda;
@@ -38,34 +38,6 @@ public class Venda {
      */
     public void setCliente(Cliente cliente) {
         this.cliente = cliente;
-    }
-
-    /**
-     * @return the produto
-     */
-    public Produto getProduto() {
-        return produto;
-    }
-
-    /**
-     * @param produto the produto to set
-     */
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    /**
-     * @return the qtd
-     */
-    public double getQtd() {
-        return qtd;
-    }
-
-    /**
-     * @param qtd the qtd to set
-     */
-    public void setQtd(double qtd) {
-        this.qtd = qtd;
     }
 
     /**
@@ -124,5 +96,9 @@ public class Venda {
         this.codVenda = codVenda;
     }
     
-    
+    @Transient
+    public String getDataFormatada() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(dataVenda.getTime());
+    }
 }

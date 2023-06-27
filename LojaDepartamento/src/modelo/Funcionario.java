@@ -166,4 +166,9 @@ public class Funcionario implements Pessoa{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         return sdf.format(dataRescisao.getTime());
     }
+    
+    @Override
+    public String toString() {
+        return nome + "; CPF: " + cpf;
+    }
 }

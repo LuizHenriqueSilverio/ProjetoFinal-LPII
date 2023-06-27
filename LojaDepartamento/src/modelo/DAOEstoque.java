@@ -31,10 +31,16 @@ public class DAOEstoque {
                 Estoque obj = new Estoque();
                 obj.setCodEstoque(rs.getInt("codEstoque"));
                 obj.setQuantidade(rs.getDouble("quantidade"));
-                java.sql.Date dt = rs.getDate("dataValidade");
-                Calendar c = Calendar.getInstance();
-                c.setTime(dt);
-                obj.setDataValidade(c);
+                
+                if (rs.getObject("dataValidade") != null) {
+                    java.sql.Date dt = rs.getDate("dataValidade");
+                    Calendar c = Calendar.getInstance();
+                    c.setTime(dt);
+                    obj.setDataValidade(c);
+                } else {
+                    obj.setDataValidade(null);
+                }
+                
                 obj.setLote(rs.getString("lote"));
                 obj.setProduto(daoProduto.localizarProduto(rs.getInt("produtos_codProdutos")));
                 lista.add(obj);
@@ -61,7 +67,13 @@ public class DAOEstoque {
         try {
             PreparedStatement pst = Conexao.getPreparedStatement(sql);
             pst.setDouble(1, obj.getQuantidade());
-            pst.setDate(2, new java.sql.Date(obj.getDataValidade().getTimeInMillis()));
+            
+            if (obj.getDataValidade () != null) {
+                pst.setDate(2, new java.sql.Date(obj.getDataValidade().getTimeInMillis()));
+            } else {
+                pst.setNull(2, java.sql.Types.DATE);
+            }
+            
             pst.setString(3, obj.getLote());
             pst.setInt(4, obj.getProduto().getCodProduto());
             if(pst.executeUpdate() > 0) {
@@ -82,7 +94,13 @@ public class DAOEstoque {
         try {
             PreparedStatement pst = Conexao.getPreparedStatement(sql);
             pst.setDouble(1, obj.getQuantidade());
-            pst.setDate(2, new java.sql.Date(obj.getDataValidade().getTimeInMillis()));
+            
+            if (obj.getDataValidade()!= null) {
+                pst.setDate(2, new java.sql.Date(obj.getDataValidade().getTimeInMillis()));
+            } else {
+                pst.setNull(2, java.sql.Types.DATE);
+            }
+            
             pst.setString(3, obj.getLote());
             pst.setInt(4, obj.getProduto().getCodProduto());
             pst.setInt(5, obj.getCodEstoque());
