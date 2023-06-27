@@ -296,6 +296,9 @@
                 <BindingProperty name="elements" source="listCliente" target="cbxCidade" targetPath="elements" updateStrategy="0" immediately="false"/>
                 <BindingProperty name="selectedItem" source="tblFuncionario" sourcePath="${selectedElement.objCidade}" target="cbxCidade" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
               </BindingProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxCidadeActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>

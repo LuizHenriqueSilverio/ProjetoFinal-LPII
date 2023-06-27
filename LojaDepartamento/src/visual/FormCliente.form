@@ -8,8 +8,6 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cliente&gt;"/>
       </AuxValues>
     </Component>
-    <Component class="modelo.ConverteData" name="converteData1">
-    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="Cadastro de Cidades"/>
@@ -448,15 +446,12 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Nascimento:"/>
               </Properties>
-              <AccessibilityProperties>
-                <Property name="AccessibleContext.accessibleName" type="java.lang.String" value="Nascimento:"/>
-              </AccessibilityProperties>
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="txtNascimento">
               <BindingProperties>
                 <BindingProperty name="value" source="tblCliente" sourcePath="${selectedElement.dataNascimento}" target="txtNascimento" targetPath="value" updateStrategy="0" immediately="false">
                   <Property name="converter" type="org.jdesktop.beansbinding.Converter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                    <ComponentRef name="converteData1"/>
+                    <ComponentRef name="default"/>
                   </Property>
                 </BindingProperty>
               </BindingProperties>

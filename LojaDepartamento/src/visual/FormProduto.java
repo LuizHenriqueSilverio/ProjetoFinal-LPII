@@ -234,6 +234,12 @@ public class FormProduto extends java.awt.Dialog {
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.objCidade}"), cbxCidade, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
         bindingGroup.addBinding(binding);
 
+        cbxCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbxCidadeActionPerformed(evt);
+            }
+        });
+
         painelAcoes.setBorder(javax.swing.BorderFactory.createTitledBorder("Ações"));
         painelAcoes.setLayout(new java.awt.GridLayout(1, 0));
 
@@ -471,6 +477,10 @@ public class FormProduto extends java.awt.Dialog {
         tblFuncionario.setRowSelectionInterval(linha, linha);
         tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
     }//GEN-LAST:event_btnUltimoActionPerformed
+
+    private void cbxCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cbxCidadeActionPerformed
 
     /**
      * @param args the command line arguments

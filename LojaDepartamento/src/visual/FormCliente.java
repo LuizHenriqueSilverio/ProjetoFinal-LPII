@@ -90,7 +90,6 @@ public class FormCliente extends java.awt.Dialog {
 
         listCliente = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList <Cliente>())
         ;
-        converteData1 = new modelo.ConverteData();
         jPanel1 = new javax.swing.JPanel();
         btnPrimeiro = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
@@ -312,7 +311,7 @@ public class FormCliente extends java.awt.Dialog {
         jLabel7.setText("Nascimento:");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataNascimento}"), txtNascimento, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        binding.setConverter(converteData1);
+        binding.setConverter(null);
         bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
@@ -380,8 +379,6 @@ public class FormCliente extends java.awt.Dialog {
                     .addComponent(txtEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
         );
-
-        jLabel7.getAccessibleContext().setAccessibleName("Nascimento:");
 
         painelAbas.addTab("Dados", Dados);
 
@@ -542,7 +539,6 @@ public class FormCliente extends java.awt.Dialog {
     private javax.swing.JButton btnProximo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUltimo;
-    private modelo.ConverteData converteData1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

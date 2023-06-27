@@ -146,7 +146,23 @@
               <SubComponents>
                 <Component class="javax.swing.JTable" name="tblEstoque">
                   <BindingProperties>
-                    <BindingProperty name="elements" source="listEstoque" target="tblEstoque" targetPath="elements" updateStrategy="0" immediately="true"/>
+                    <BindingProperty name="elements" source="listEstoque" target="tblEstoque" targetPath="elements" updateStrategy="0" immediately="true">
+                      <Subbinding sourcePath="${lote}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="String.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${codEstoque}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Integer.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${dataValidade}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="java.util.Calendar.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${quantidade}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="Double.class"/>
+                      </Subbinding>
+                      <Subbinding sourcePath="${produto}">
+                        <BindingParameter name="javax.swing.binding.ParameterKeys.COLUMN_CLASS" value="modelo.Produto.class"/>
+                      </Subbinding>
+                    </BindingProperty>
                   </BindingProperties>
                 </Component>
               </SubComponents>
@@ -167,34 +183,33 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="painelAcoes" pref="598" max="32767" attributes="0"/>
+                      <Component id="painelAcoes" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Component id="txtCodigo" min="-2" pref="51" max="-2" attributes="0"/>
                           </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="53" max="-2" attributes="0"/>
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel6" alignment="0" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="0" min="-2" pref="43" max="-2" attributes="0"/>
+                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="71" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="cbxProduto" min="-2" pref="218" max="-2" attributes="0"/>
                                   <Component id="txtLote" min="-2" pref="218" max="-2" attributes="0"/>
-                                  <Component id="txtDataValidade" min="-2" pref="218" max="-2" attributes="0"/>
                                   <Component id="txtQuantidade" min="-2" pref="218" max="-2" attributes="0"/>
+                                  <Component id="cbxDataValidade" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
-                      <EmptySpace pref="231" max="32767" attributes="0"/>
+                      <EmptySpace pref="234" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -208,27 +223,30 @@
                           <Component id="txtCodigo" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtQuantidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbxProduto" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtDataValidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <Component id="txtQuantidade" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="separate" max="-2" attributes="0"/>
+                              <Component id="txtLote" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="cbxDataValidade" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
                       </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel6" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="txtLote" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbxProduto" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="119" max="32767" attributes="0"/>
+                      <EmptySpace pref="133" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -264,7 +282,7 @@
             </Component>
             <Component class="javax.swing.JTextField" name="txtQuantidade">
               <BindingProperties>
-                <BindingProperty name="text" source="tblEstoque" sourcePath="${selectedElement.nomeFuncionario}" target="txtQuantidade" targetPath="text" updateStrategy="0" immediately="false">
+                <BindingProperty name="text" source="tblEstoque" sourcePath="${selectedElement.quantidade}" target="txtQuantidade" targetPath="text" updateStrategy="0" immediately="false">
                   <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
                 </BindingProperty>
               </BindingProperties>
@@ -274,8 +292,8 @@
             </Component>
             <Component class="javax.swing.JComboBox" name="cbxProduto">
               <BindingProperties>
-                <BindingProperty name="elements" source="listEstoque" target="cbxProduto" targetPath="elements" updateStrategy="0" immediately="false"/>
-                <BindingProperty name="selectedItem" source="tblEstoque" sourcePath="${selectedElement.objCidade}" target="cbxProduto" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
+                <BindingProperty name="elements" source="listProduto" sourcePath="${}" target="cbxProduto" targetPath="elements" updateStrategy="0" immediately="false"/>
+                <BindingProperty name="selectedItem" source="listProduto" sourcePath="${selectedElement.produto}" target="cbxProduto" targetPath="selectedItem" updateStrategy="0" immediately="false"/>
               </BindingProperties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -342,13 +360,6 @@
                 <Property name="text" type="java.lang.String" value="Data de Validade: "/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="txtDataValidade">
-              <BindingProperties>
-                <BindingProperty name="text" source="tblEstoque" sourcePath="${selectedElement.salarioFuncionario}" target="txtDataValidade" targetPath="text" updateStrategy="0" immediately="false">
-                  <BindingParameter name="javax.swing.binding.ParameterKeys.TEXT_CHANGE_STRATEGY" value="javax.swing.binding.TextChangeStrategy.ON_TYPE"/>
-                </BindingProperty>
-              </BindingProperties>
-            </Component>
             <Component class="javax.swing.JLabel" name="jLabel6">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lote:"/>
@@ -356,12 +367,20 @@
             </Component>
             <Component class="javax.swing.JFormattedTextField" name="txtLote">
               <BindingProperties>
-                <BindingProperty name="value" source="tblEstoque" sourcePath="${selectedElement.nascimentoFuncionario}" target="txtLote" targetPath="value" updateStrategy="0" immediately="false"/>
+                <BindingProperty name="value" source="tblEstoque" sourcePath="${selectedElement.lote}" target="txtLote" targetPath="value" updateStrategy="0" immediately="false"/>
               </BindingProperties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(maskData)"/>
                 <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="javax.swing.text.MaskFormatter maskData = null;&#xd;&#xa;try {&#xd;&#xa;    maskData = new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;    maskData.setPlaceholderCharacter(&apos;_&apos;);&#xd;&#xa;}catch(Exception e) {&#xd;&#xa;    System.out.println(&quot;Erro: &quot; + e);&#xd;&#xa;}"/>
               </AuxValues>
+            </Component>
+            <Component class="javax.swing.JFormattedTextField" name="cbxDataValidade">
+              <BindingProperties>
+                <BindingProperty name="value" source="listEstoque" target="cbxDataValidade" targetPath="value" updateStrategy="0" immediately="false"/>
+              </BindingProperties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbxDataValidadeActionPerformed"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
