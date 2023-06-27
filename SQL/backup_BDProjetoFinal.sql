@@ -110,7 +110,6 @@ CREATE TABLE IF NOT EXISTS `vendasprodutos` (
   `VENDA_codVENDA` int(11) NOT NULL,
   `PRODUTOS_codPRODUTOS` int(11) NOT NULL,
   `quantidade` double NOT NULL,
-  `codVendasProdutos` int(11) DEFAULT NULL,
   PRIMARY KEY (`VENDA_codVENDA`,`PRODUTOS_codPRODUTOS`),
   KEY `fk_VENDA_has_PRODUTOS_PRODUTOS1_idx` (`PRODUTOS_codPRODUTOS`),
   KEY `fk_VENDA_has_PRODUTOS_VENDA_idx` (`VENDA_codVENDA`),
