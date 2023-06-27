@@ -90,6 +90,7 @@ public class FormCliente extends java.awt.Dialog {
 
         listCliente = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList <Cliente>())
         ;
+        converteData1 = new modelo.ConverteData();
         jPanel1 = new javax.swing.JPanel();
         btnPrimeiro = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
@@ -123,7 +124,7 @@ public class FormCliente extends java.awt.Dialog {
             maskData = new javax.swing.text.MaskFormatter("##/##/####");
             maskData.setPlaceholderCharacter('_');
         }catch(Exception e){
-            System.out.println("Erro na mascara"+e);
+            System.out.println("Erro na mascara:" + e);
         }
         txtNascimento = new javax.swing.JFormattedTextField(maskData);
 
@@ -311,7 +312,7 @@ public class FormCliente extends java.awt.Dialog {
         jLabel7.setText("Nascimento:");
 
         binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblCliente, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataNascimento}"), txtNascimento, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        binding.setConverter(null);
+        binding.setConverter(converteData1);
         bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
@@ -539,6 +540,7 @@ public class FormCliente extends java.awt.Dialog {
     private javax.swing.JButton btnProximo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUltimo;
+    private modelo.ConverteData converteData1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

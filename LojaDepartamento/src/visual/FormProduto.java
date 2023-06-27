@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Produto;
 import modelo.DAOProduto;
-import modelo.DAOCliente;
 import modelo.Cliente;
 /**
  *
@@ -35,8 +34,8 @@ public class FormProduto extends java.awt.Dialog {
         int linha = listProduto.size() - 1;
         
         if(linha >= 0) {
-            tblFuncionario.setRowSelectionInterval(linha, linha);
-            tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, linha, true));
+            tblProduto.setRowSelectionInterval(linha, linha);
+            tblProduto.scrollRectToVisible(tblProduto.getCellRect(linha, linha, true));
         }
     }
     
@@ -51,9 +50,9 @@ public class FormProduto extends java.awt.Dialog {
         if(linha < 0) {
             btnExcluir.setEnabled(false);
             txtCodigo.setText("");
-            txtFuncionario.setText("");
-            txtNascimento.setText("");
-            txtSalario.setText("");
+            txtDescricao.setText("");
+            txtVenda.setText("");
+            txtCusto.setText("");
         }else {
             btnExcluir.setEnabled(!editando);
         }
@@ -63,32 +62,28 @@ public class FormProduto extends java.awt.Dialog {
         btnAnterior.setEnabled(!editando);
         btnUltimo.setEnabled(!editando);
         
-        txtFuncionario.setEnabled(editando);
-        cbxCidade.setEnabled(editando);
-        txtNascimento.setEnabled(editando);
-        txtSalario.setEnabled(editando);
-        tblFuncionario.setEnabled(editando);
+        txtDescricao.setEnabled(editando);
+        txtCusto.setEnabled(editando);
+        txtVenda.setEnabled(editando);
+        tblProduto.setEnabled(editando);
     }
     
     public boolean validaCampos() {
-        if(!(txtFuncionario.getText().length() > 0)) {
-            JOptionPane.showMessageDialog(null, "Informe o nome do funcionário!");
-            txtFuncionario.requestFocus();
+        if(!(txtDescricao.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe a descrição do Produto!");
+            txtDescricao.requestFocus();
             return false;
         }
-        if(!(cbxCidade.getSelectedIndex() >= 0)) {
-            JOptionPane.showMessageDialog(null, "Selecione uma cidade!");
-            cbxCidade.requestFocus();
-            return false;
-        }
-        if(!(txtNascimento.getText().length() > 0)) {
-            JOptionPane.showMessageDialog(null, "Informe a data de nascimento!");
-            txtNascimento.requestFocus();
-            return false;
-        }
-        if(!(txtSalario.getText().length() > 0)) {
+
+        if(!(txtCusto.getText().length() > 0)) {
             JOptionPane.showMessageDialog(null, "Informe o valor do salário!");
-            txtSalario.requestFocus();
+            txtCusto.requestFocus();
+            return false;
+        }
+        
+        if(!(txtVenda.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe o valor do salário!");
+            txtCusto.requestFocus();
             return false;
         }
         return true;
@@ -104,7 +99,6 @@ public class FormProduto extends java.awt.Dialog {
 
         listProduto = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Produto>())
         ;
-        listCliente = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Cliente>());
         jPanel1 = new javax.swing.JPanel();
         btnPrimeiro = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
@@ -114,14 +108,12 @@ public class FormProduto extends java.awt.Dialog {
         painelAbas = new javax.swing.JTabbedPane();
         Listagem = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblFuncionario = new javax.swing.JTable();
+        tblProduto = new javax.swing.JTable();
         Dados = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
-        txtFuncionario = new javax.swing.JTextField();
-        cbxCidade = new javax.swing.JComboBox<>();
+        txtDescricao = new javax.swing.JTextField();
         painelAcoes = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
@@ -129,16 +121,9 @@ public class FormProduto extends java.awt.Dialog {
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        txtSalario = new javax.swing.JTextField();
+        txtCusto = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        javax.swing.text.MaskFormatter maskData = null;
-        try {
-            maskData = new javax.swing.text.MaskFormatter("##/##/####");
-            maskData.setPlaceholderCharacter('_');
-        }catch(Exception e) {
-            System.out.println("Erro: " + e);
-        }
-        txtNascimento = new javax.swing.JFormattedTextField(maskData);
+        txtVenda = new javax.swing.JTextField();
 
         setTitle("Cadastro de Cidades");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -194,10 +179,26 @@ public class FormProduto extends java.awt.Dialog {
 
         Listagem.setLayout(new java.awt.BorderLayout());
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listProduto, tblFuncionario);
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listProduto, tblProduto);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codProduto}"));
+        columnBinding.setColumnName("Código");
+        columnBinding.setColumnClass(Integer.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descricao}"));
+        columnBinding.setColumnName("Descricao");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoCusto}"));
+        columnBinding.setColumnName("Preco Custo");
+        columnBinding.setColumnClass(Double.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoVenda}"));
+        columnBinding.setColumnName("Preco Venda");
+        columnBinding.setColumnClass(Double.class);
+        columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        jScrollPane2.setViewportView(tblFuncionario);
+        jScrollPane2.setViewportView(tblProduto);
 
         Listagem.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -205,13 +206,11 @@ public class FormProduto extends java.awt.Dialog {
 
         jLabel1.setText("Código:");
 
-        jLabel2.setText("Nome:");
-
-        jLabel3.setText("Cidade:");
+        jLabel2.setText("Descrição:");
 
         txtCodigo.setEditable(false);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codFuncionario}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codFuncionario}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
@@ -220,23 +219,12 @@ public class FormProduto extends java.awt.Dialog {
             }
         });
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nomeFuncionario}"), txtFuncionario, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nomeFuncionario}"), txtDescricao, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        txtFuncionario.addActionListener(new java.awt.event.ActionListener() {
+        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFuncionarioActionPerformed(evt);
-            }
-        });
-
-        org.jdesktop.swingbinding.JComboBoxBinding jComboBoxBinding = org.jdesktop.swingbinding.SwingBindings.createJComboBoxBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listCliente, cbxCidade);
-        bindingGroup.addBinding(jComboBoxBinding);
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.objCidade}"), cbxCidade, org.jdesktop.beansbinding.BeanProperty.create("selectedItem"));
-        bindingGroup.addBinding(binding);
-
-        cbxCidade.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbxCidadeActionPerformed(evt);
+                txtDescricaoActionPerformed(evt);
             }
         });
 
@@ -283,15 +271,12 @@ public class FormProduto extends java.awt.Dialog {
         });
         painelAcoes.add(btnExcluir);
 
-        jLabel4.setText("Salário:");
+        jLabel4.setText("Preço de Custo:");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.salarioFuncionario}"), txtSalario, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.salarioFuncionario}"), txtCusto, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        jLabel6.setText("Nascimento:");
-
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nascimentoFuncionario}"), txtNascimento, org.jdesktop.beansbinding.BeanProperty.create("value"));
-        bindingGroup.addBinding(binding);
+        jLabel6.setText("Preço de Venda:");
 
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
         Dados.setLayout(DadosLayout);
@@ -304,30 +289,24 @@ public class FormProduto extends java.awt.Dialog {
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DadosLayout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addComponent(jLabel1)
-                        .addGap(18, 18, 18)
-                        .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1))
                     .addGroup(DadosLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(DadosLayout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(25, 25, 25)
-                                .addComponent(cbxCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addGroup(DadosLayout.createSequentialGroup()
                                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel4)
                                     .addComponent(jLabel2))
-                                .addGap(18, 18, 18)
+                                .addGap(15, 15, 15)
                                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(DadosLayout.createSequentialGroup()
                                 .addComponent(jLabel6)
-                                .addGap(18, 18, 18)
-                                .addComponent(txtNascimento)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(228, Short.MAX_VALUE))
         );
         DadosLayout.setVerticalGroup(
             DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -341,20 +320,16 @@ public class FormProduto extends java.awt.Dialog {
                 .addGap(18, 18, 18)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(txtNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(13, 13, 13)
-                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbxCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(99, Short.MAX_VALUE))
+                    .addComponent(txtVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(134, Short.MAX_VALUE))
         );
 
         painelAbas.addTab("Dados", Dados);
@@ -398,21 +373,21 @@ public class FormProduto extends java.awt.Dialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
 
-    private void txtFuncionarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFuncionarioActionPerformed
+    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtFuncionarioActionPerformed
+    }//GEN-LAST:event_txtDescricaoActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         listProduto.add((Produto) new Produto()); // cria um objeto e uma linha na tabela
         int linha = listProduto.size() - 1;
-        tblFuncionario.setRowSelectionInterval(linha, linha); //seleciona a linha
-        txtFuncionario.requestFocus(); //caixa de texto com o nome da cidade recebe o foco
+        tblProduto.setRowSelectionInterval(linha, linha); //seleciona a linha
+        txtDescricao.requestFocus(); //caixa de texto com o nome da cidade recebe o foco
         trataEdicao(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
        if(validaCampos()){
-            int linhaSelecionada = tblFuncionario.getSelectedRow();
+            int linhaSelecionada = tblProduto.getSelectedRow();
             Produto objProduto = listProduto.get(linhaSelecionada);
             objDAOProduto.salvar(objProduto);
             atualizaTabela();
@@ -422,7 +397,7 @@ public class FormProduto extends java.awt.Dialog {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         trataEdicao(true);
-        txtFuncionario.requestFocus();
+        txtDescricao.requestFocus();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -435,7 +410,7 @@ public class FormProduto extends java.awt.Dialog {
                     JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim","Não"}, "Sim");
         
         if(opcao == 0) {
-            int linhaSelecionada = tblFuncionario.getSelectedRow();
+            int linhaSelecionada = tblProduto.getSelectedRow();
             Produto objProduto = listProduto.get(linhaSelecionada);
             objDAOProduto.remover(objProduto);
             atualizaTabela();
@@ -445,42 +420,38 @@ public class FormProduto extends java.awt.Dialog {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
-        tblFuncionario.setRowSelectionInterval(0, 0);
-        tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(0, 0, true));
+        tblProduto.setRowSelectionInterval(0, 0);
+        tblProduto.scrollRectToVisible(tblProduto.getCellRect(0, 0, true));
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        int linha = tblFuncionario.getSelectedRow();
+        int linha = tblProduto.getSelectedRow();
         
         if(linha - 1 >= 0) {
             linha--;
         }
         
-        tblFuncionario.setRowSelectionInterval(linha, linha);
-        tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
+        tblProduto.setRowSelectionInterval(linha, linha);
+        tblProduto.scrollRectToVisible(tblProduto.getCellRect(linha, 0, true));
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
-        int linha = tblFuncionario.getSelectedRow();
+        int linha = tblProduto.getSelectedRow();
         
-        if(linha + 1 <= (tblFuncionario.getRowCount()) - 1){
+        if(linha + 1 <= (tblProduto.getRowCount()) - 1){
             linha++;
         }
         
-        tblFuncionario.setRowSelectionInterval(linha, linha);
-        tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
+        tblProduto.setRowSelectionInterval(linha, linha);
+        tblProduto.scrollRectToVisible(tblProduto.getCellRect(linha, 0, true));
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
-        int linha = tblFuncionario.getRowCount() - 1;
+        int linha = tblProduto.getRowCount() - 1;
         
-        tblFuncionario.setRowSelectionInterval(linha, linha);
-        tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
+        tblProduto.setRowSelectionInterval(linha, linha);
+        tblProduto.scrollRectToVisible(tblProduto.getCellRect(linha, 0, true));
     }//GEN-LAST:event_btnUltimoActionPerformed
-
-    private void cbxCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbxCidadeActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_cbxCidadeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -513,23 +484,20 @@ public class FormProduto extends java.awt.Dialog {
     private javax.swing.JButton btnProximo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUltimo;
-    private javax.swing.JComboBox<String> cbxCidade;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private java.util.List<Cliente> listCliente;
     private java.util.List<Produto> listProduto;
     private javax.swing.JTabbedPane painelAbas;
     private javax.swing.JPanel painelAcoes;
-    private javax.swing.JTable tblFuncionario;
+    private javax.swing.JTable tblProduto;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtFuncionario;
-    private javax.swing.JFormattedTextField txtNascimento;
-    private javax.swing.JTextField txtSalario;
+    private javax.swing.JTextField txtCusto;
+    private javax.swing.JTextField txtDescricao;
+    private javax.swing.JTextField txtVenda;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }

@@ -8,6 +8,8 @@
         <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;Cliente&gt;"/>
       </AuxValues>
     </Component>
+    <Component class="modelo.ConverteData" name="converteData1">
+    </Component>
   </NonVisualComponents>
   <Properties>
     <Property name="title" type="java.lang.String" value="Cadastro de Cidades"/>
@@ -451,13 +453,13 @@
               <BindingProperties>
                 <BindingProperty name="value" source="tblCliente" sourcePath="${selectedElement.dataNascimento}" target="txtNascimento" targetPath="value" updateStrategy="0" immediately="false">
                   <Property name="converter" type="org.jdesktop.beansbinding.Converter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                    <ComponentRef name="default"/>
+                    <ComponentRef name="converteData1"/>
                   </Property>
                 </BindingProperty>
               </BindingProperties>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_CreateCodeCustom" type="java.lang.String" value="new javax.swing.JFormattedTextField(maskData)"/>
-                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="javax.swing.text.MaskFormatter maskData = null;&#xd;&#xa;try{&#xd;&#xa;maskData = new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;maskData.setPlaceholderCharacter(&apos;_&apos;);&#xd;&#xa;}catch(Exception e){&#xd;&#xa;System.out.println(&quot;Erro na mascara&quot;+e);&#xd;&#xa;}"/>
+                <AuxValue name="JavaCodeGenerator_CreateCodePre" type="java.lang.String" value="javax.swing.text.MaskFormatter maskData = null;&#xd;&#xa;try{&#xd;&#xa;maskData = new javax.swing.text.MaskFormatter(&quot;##/##/####&quot;);&#xd;&#xa;maskData.setPlaceholderCharacter(&apos;_&apos;);&#xd;&#xa;}catch(Exception e){&#xd;&#xa;System.out.println(&quot;Erro na mascara:&quot; + e);&#xd;&#xa;}"/>
               </AuxValues>
             </Component>
           </SubComponents>
