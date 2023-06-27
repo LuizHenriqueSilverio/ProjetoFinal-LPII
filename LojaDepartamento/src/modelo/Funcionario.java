@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.beans.Transient;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 /**
@@ -151,5 +153,17 @@ public class Funcionario implements Pessoa{
      */
     public void setCodFuncionario(Integer codFuncionario) {
         this.codFuncionario = codFuncionario;
+    }
+    
+    @Transient
+    public String getAdmissaoFormatado() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(dataAdmissao.getTime());
+    }
+    
+    @Transient
+    public String getRescisaoFormatado() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        return sdf.format(dataRescisao.getTime());
     }
 }

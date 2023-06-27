@@ -50,9 +50,13 @@ public class FormFuncionario extends java.awt.Dialog {
         if(linha < 0) {
             btnExcluir.setEnabled(false);
             txtCodigo.setText("");
-            txtDescricao.setText("");
-            txtVenda.setText("");
-            txtCusto.setText("");
+            txtCpf.setText("");
+            txtNome.setText("");
+            txtDepartamento.setText("");
+            txtCargo.setText("");
+            txtSalario.setText("");
+            txtDataAdmissao.setText("");
+            txtDataRescisao.setText("");
         }else {
             btnExcluir.setEnabled(!editando);
         }
@@ -62,28 +66,50 @@ public class FormFuncionario extends java.awt.Dialog {
         btnAnterior.setEnabled(!editando);
         btnUltimo.setEnabled(!editando);
         
-        txtDescricao.setEnabled(editando);
-        txtCusto.setEnabled(editando);
-        txtVenda.setEnabled(editando);
+        txtCpf.setEnabled(editando);
+        txtNome.setEnabled(editando);
+        txtDepartamento.setEnabled(editando);
+        txtCargo.setEnabled(editando);
+        txtSalario.setEnabled(editando);
+        txtDataAdmissao.setEnabled(editando);
+        txtDataRescisao.setEnabled(editando);
         tblFuncionario.setEnabled(editando);
     }
     
     public boolean validaCampos() {
-        if(!(txtDescricao.getText().length() > 0)) {
-            JOptionPane.showMessageDialog(null, "Informe a descrição do Produto!");
-            txtDescricao.requestFocus();
+        if(!(txtCpf.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe o CPF!");
+            txtCpf.requestFocus();
             return false;
         }
 
-        if(!(txtCusto.getText().length() > 0)) {
-            JOptionPane.showMessageDialog(null, "Informe o valor do salário!");
-            txtCusto.requestFocus();
+        if(!(txtNome.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe o Nome!");
+            txtNome.requestFocus();
             return false;
         }
         
-        if(!(txtVenda.getText().length() > 0)) {
-            JOptionPane.showMessageDialog(null, "Informe o valor do salário!");
-            txtCusto.requestFocus();
+        if(!(txtDepartamento.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe o Departamento!");
+            txtDepartamento.requestFocus();
+            return false;
+        }
+        
+        if(!(txtCargo.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe o Cargo!");
+            txtCargo.requestFocus();
+            return false;
+        }
+        
+        if(!(txtSalario.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe o Salário!");
+            txtSalario.requestFocus();
+            return false;
+        }
+        
+        if(!(txtDataAdmissao.getText().length() > 0)) {
+            JOptionPane.showMessageDialog(null, "Informe a Data de Admissão!");
+            txtDataAdmissao.requestFocus();
             return false;
         }
         return true;
@@ -98,6 +124,7 @@ public class FormFuncionario extends java.awt.Dialog {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
         listFuncionario = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Funcionario>());
+        converteData1 = new modelo.ConverteData();
         jPanel1 = new javax.swing.JPanel();
         btnPrimeiro = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
@@ -112,24 +139,39 @@ public class FormFuncionario extends java.awt.Dialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txtCodigo = new javax.swing.JTextField();
-        txtDescricao = new javax.swing.JTextField();
+        txtCpf = new javax.swing.JTextField();
         painelAcoes = new javax.swing.JPanel();
         btnNovo = new javax.swing.JButton();
         btnEditar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         btnSalvar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
-        txtCusto = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txtDepartamento = new javax.swing.JTextField();
         javax.swing.text.MaskFormatter maskData = null;
-        try{
+        try {
             maskData = new javax.swing.text.MaskFormatter("##/##/####");
             maskData.setPlaceholderCharacter('_');
-        }catch(Exception e){
-            System.out.println("Erro na mascara:" + e);
+        }catch(Exception e) {
+            System.out.println("Erro: " + e);
         }
-        txtVenda = new javax.swing.JFormattedTextField(maskData);
+        txtDataAdmissao = new javax.swing.JFormattedTextField(maskData);
+        jLabel5 = new javax.swing.JLabel();
+        maskData = null;
+        try {
+            maskData = new javax.swing.text.MaskFormatter("##/##/####");
+            maskData.setPlaceholderCharacter('_');
+        }catch(Exception e) {
+            System.out.println("Erro: " + e);
+        }
+        txtDataRescisao = new javax.swing.JFormattedTextField(maskData);
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        txtNome = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txtCargo = new javax.swing.JTextField();
+        jLabel10 = new javax.swing.JLabel();
+        txtSalario = new javax.swing.JTextField();
 
         setTitle("Cadastro de Produtos");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -189,35 +231,27 @@ public class FormFuncionario extends java.awt.Dialog {
         org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codFuncionario}"));
         columnBinding.setColumnName("Código");
         columnBinding.setColumnClass(Integer.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpf}"));
-        columnBinding.setColumnName("Cpf");
+        columnBinding.setColumnName("CPF");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
         columnBinding.setColumnName("Nome");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${departamento}"));
         columnBinding.setColumnName("Departamento");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cargo}"));
         columnBinding.setColumnName("Cargo");
         columnBinding.setColumnClass(String.class);
-        columnBinding.setEditable(false);
         columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${salario}"));
         columnBinding.setColumnName("Salario");
         columnBinding.setColumnClass(Double.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataAdmissao}"));
-        columnBinding.setColumnName("Data Admissao");
-        columnBinding.setColumnClass(java.util.Calendar.class);
-        columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataRescisao}"));
-        columnBinding.setColumnName("Data Rescisao");
-        columnBinding.setColumnClass(java.util.Calendar.class);
-        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${admissaoFormatado}"));
+        columnBinding.setColumnName("Admissão");
+        columnBinding.setColumnClass(String.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${rescisaoFormtado}"));
+        columnBinding.setColumnName("Rescisão");
+        columnBinding.setColumnClass(String.class);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
         jScrollPane2.setViewportView(tblFuncionario);
@@ -228,7 +262,7 @@ public class FormFuncionario extends java.awt.Dialog {
 
         jLabel1.setText("Código:");
 
-        jLabel2.setText("Descrição:");
+        jLabel2.setText("CPF:");
 
         txtCodigo.setEditable(false);
 
@@ -241,12 +275,12 @@ public class FormFuncionario extends java.awt.Dialog {
             }
         });
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.descricao}"), txtDescricao, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cpf}"), txtCpf, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        txtDescricao.addActionListener(new java.awt.event.ActionListener() {
+        txtCpf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtDescricaoActionPerformed(evt);
+                txtCpfActionPerformed(evt);
             }
         });
 
@@ -293,15 +327,73 @@ public class FormFuncionario extends java.awt.Dialog {
         });
         painelAcoes.add(btnExcluir);
 
-        jLabel4.setText("Preço de Custo:");
+        jLabel3.setText("Nome:");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoCusto}"), txtCusto, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.departamento}"), txtDepartamento, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
-        jLabel6.setText("Preço de Venda:");
+        txtDepartamento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDepartamentoActionPerformed(evt);
+            }
+        });
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoVenda}"), txtVenda, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataAdmissao}"), txtDataAdmissao, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding.setConverter(converteData1);
         bindingGroup.addBinding(binding);
+
+        txtDataAdmissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataAdmissaoActionPerformed(evt);
+            }
+        });
+
+        jLabel5.setText("Data de Admissão:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.dataRescisao}"), txtDataRescisao, org.jdesktop.beansbinding.BeanProperty.create("value"));
+        binding.setConverter(converteData1);
+        bindingGroup.addBinding(binding);
+
+        txtDataRescisao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtDataRescisaoActionPerformed(evt);
+            }
+        });
+
+        jLabel7.setText("Data de Rescisão:");
+
+        jLabel8.setText("Departamento:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nome}"), txtNome, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        txtNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtNomeActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setText("Cargo:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.cargo}"), txtCargo, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        txtCargo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtCargoActionPerformed(evt);
+            }
+        });
+
+        jLabel10.setText("Salario:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.salario}"), txtSalario, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
+
+        txtSalario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSalarioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
         Dados.setLayout(DadosLayout);
@@ -309,7 +401,7 @@ public class FormFuncionario extends java.awt.Dialog {
             DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(painelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
+                .addComponent(painelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 716, Short.MAX_VALUE))
             .addGroup(DadosLayout.createSequentialGroup()
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DadosLayout.createSequentialGroup()
@@ -318,20 +410,27 @@ public class FormFuncionario extends java.awt.Dialog {
                     .addGroup(DadosLayout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel7)
+                            .addComponent(jLabel8)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(69, 69, 69)
+                        .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtDataAdmissao)
+                            .addComponent(txtDataRescisao)
                             .addGroup(DadosLayout.createSequentialGroup()
                                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4)
-                                    .addComponent(jLabel2))
-                                .addGap(15, 15, 15)
-                                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(DadosLayout.createSequentialGroup()
-                                .addComponent(jLabel6)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(330, Short.MAX_VALUE))
+                                    .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addGap(206, 206, 206))
         );
         DadosLayout.setVerticalGroup(
             DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -342,19 +441,35 @@ public class FormFuncionario extends java.awt.Dialog {
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txtDepartamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(txtCargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(txtSalario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(txtCusto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLabel5)
+                    .addComponent(txtDataAdmissao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txtVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(134, Short.MAX_VALUE))
+                    .addComponent(jLabel7)
+                    .addComponent(txtDataRescisao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24))
         );
 
         painelAbas.addTab("Dados", Dados);
@@ -370,7 +485,7 @@ public class FormFuncionario extends java.awt.Dialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 31, Short.MAX_VALUE)
                 .addComponent(painelAbas, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -398,15 +513,15 @@ public class FormFuncionario extends java.awt.Dialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
 
-    private void txtDescricaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDescricaoActionPerformed
+    private void txtCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCpfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtDescricaoActionPerformed
+    }//GEN-LAST:event_txtCpfActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
         listFuncionario.add((Funcionario) new Funcionario()); // cria um objeto e uma linha na tabela
         int linha = listFuncionario.size() - 1;
         tblFuncionario.setRowSelectionInterval(linha, linha); //seleciona a linha
-        txtDescricao.requestFocus(); //caixa de texto com o nome da cidade recebe o foco
+        txtCpf.requestFocus(); //caixa de texto com o nome da cidade recebe o foco
         trataEdicao(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
@@ -422,7 +537,7 @@ public class FormFuncionario extends java.awt.Dialog {
 
     private void btnEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarActionPerformed
         trataEdicao(true);
-        txtDescricao.requestFocus();
+        txtCpf.requestFocus();
     }//GEN-LAST:event_btnEditarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -478,6 +593,30 @@ public class FormFuncionario extends java.awt.Dialog {
         tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
     }//GEN-LAST:event_btnUltimoActionPerformed
 
+    private void txtDepartamentoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDepartamentoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDepartamentoActionPerformed
+
+    private void txtDataAdmissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataAdmissaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataAdmissaoActionPerformed
+
+    private void txtDataRescisaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtDataRescisaoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtDataRescisaoActionPerformed
+
+    private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtNomeActionPerformed
+
+    private void txtCargoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCargoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtCargoActionPerformed
+
+    private void txtSalarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSalarioActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSalarioActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -509,20 +648,29 @@ public class FormFuncionario extends java.awt.Dialog {
     private javax.swing.JButton btnProximo;
     private javax.swing.JButton btnSalvar;
     private javax.swing.JButton btnUltimo;
+    private modelo.ConverteData converteData1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private java.util.List<Funcionario> listFuncionario;
     private javax.swing.JTabbedPane painelAbas;
     private javax.swing.JPanel painelAcoes;
     private javax.swing.JTable tblFuncionario;
+    private javax.swing.JTextField txtCargo;
     private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtCusto;
-    private javax.swing.JTextField txtDescricao;
-    private javax.swing.JTextField txtVenda;
+    private javax.swing.JTextField txtCpf;
+    private javax.swing.JFormattedTextField txtDataAdmissao;
+    private javax.swing.JFormattedTextField txtDataRescisao;
+    private javax.swing.JTextField txtDepartamento;
+    private javax.swing.JTextField txtNome;
+    private javax.swing.JTextField txtSalario;
     private org.jdesktop.beansbinding.BindingGroup bindingGroup;
     // End of variables declaration//GEN-END:variables
 }
