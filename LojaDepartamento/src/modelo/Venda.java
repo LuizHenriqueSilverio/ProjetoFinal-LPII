@@ -5,6 +5,8 @@
  */
 package modelo;
 
+import java.util.Calendar;
+
 /**
  *
  * @author luizh
@@ -17,16 +19,12 @@ public class Venda {
     private double qtd;
     private Funcionario funcionario;
     private double valorVenda;
-    private String dataVenda;
+    private Calendar dataVenda;
 
-    public Venda(Cliente cli, Produto prod, double qtd, Funcionario func, double valor, String data) {
-        this.cliente = cli;
-        this.produto = prod;
-        this.qtd = qtd;
-        this.funcionario = func;
-        this.valorVenda = valor;
-        this.dataVenda = data;
+    public Venda() {
+        
     }
+    
     
     /**
      * @return the cliente
@@ -101,14 +99,14 @@ public class Venda {
     /**
      * @return the dataVenda
      */
-    public String getDataVenda() {
+    public Calendar getDataVenda() {
         return dataVenda;
     }
 
     /**
      * @param dataVenda the dataVenda to set
      */
-    public void setDataVenda(String dataVenda) {
+    public void setDataVenda(Calendar dataVenda) {
         this.dataVenda = dataVenda;
     }
 

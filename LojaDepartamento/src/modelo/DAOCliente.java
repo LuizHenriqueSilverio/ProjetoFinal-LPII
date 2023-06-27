@@ -119,5 +119,30 @@ public class DAOCliente {
         }
         return false;
     }
+    
+    public Cliente localizarCliente(Integer id) {
+        String sql = "select * from clientes where codClientes=?";
+        Cliente obj = new Cliente();
+        try {
+            PreparedStatement pst = Conexao.getPreparedStatement(sql);
+            pst.setInt(1, id);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                obj.setCodCliente((rs.getInt("codClientes")));
+                obj.setCpf(rs.getString("cpf"));
+                obj.setNome(rs.getString("nome"));
+                java.sql.Date dt = rs.getDate("dataNascimento");
+                Calendar c = Calendar.getInstance();
+                c.setTime(dt);
+                obj.setDataNascimento(c);
+                obj.setTelefone(rs.getString("telefone"));
+                obj.setEndereco(rs.getString("endereco"));
+                return obj;
+            }
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
 
+        }
+        return null;
+    }
 }
