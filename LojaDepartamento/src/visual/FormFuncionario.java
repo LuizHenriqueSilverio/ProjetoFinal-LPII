@@ -7,21 +7,21 @@ package visual;
 
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
-import modelo.Produto;
-import modelo.DAOProduto;
-import modelo.Cliente;
+
+import modelo.DAOFuncionario;
+import modelo.Funcionario;
 /**
  *
  * @author luizh
  */
-public class FormProduto extends java.awt.Dialog {
+public class FormFuncionario extends java.awt.Dialog {
 
-    DAOProduto objDAOProduto = new DAOProduto();
+    DAOFuncionario objDAOFuncionario = new DAOFuncionario();
     
     /**
      * Creates new form FormCidade
      */
-    public FormProduto(java.awt.Frame parent, boolean modal) {
+    public FormFuncionario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         atualizaTabela();
@@ -29,13 +29,13 @@ public class FormProduto extends java.awt.Dialog {
     }
 
     public void atualizaTabela() {
-        listProduto.clear();
-        listProduto.addAll(objDAOProduto.getListaProduto());
-        int linha = listProduto.size() - 1;
+        listFuncionario.clear();
+        listFuncionario.addAll(objDAOFuncionario.getListaFuncionario());
+        int linha = listFuncionario.size() - 1;
         
         if(linha >= 0) {
-            tblProduto.setRowSelectionInterval(linha, linha);
-            tblProduto.scrollRectToVisible(tblProduto.getCellRect(linha, linha, true));
+            tblFuncionario.setRowSelectionInterval(linha, linha);
+            tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, linha, true));
         }
     }
     
@@ -46,7 +46,7 @@ public class FormProduto extends java.awt.Dialog {
         btnNovo.setEnabled(!editando);
         btnFechar.setEnabled(!editando);
         
-        int linha = listProduto.size() - 1;
+        int linha = listFuncionario.size() - 1;
         if(linha < 0) {
             btnExcluir.setEnabled(false);
             txtCodigo.setText("");
@@ -65,7 +65,7 @@ public class FormProduto extends java.awt.Dialog {
         txtDescricao.setEnabled(editando);
         txtCusto.setEnabled(editando);
         txtVenda.setEnabled(editando);
-        tblProduto.setEnabled(editando);
+        tblFuncionario.setEnabled(editando);
     }
     
     public boolean validaCampos() {
@@ -97,8 +97,7 @@ public class FormProduto extends java.awt.Dialog {
     private void initComponents() {
         bindingGroup = new org.jdesktop.beansbinding.BindingGroup();
 
-        listProduto = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Produto>())
-        ;
+        listFuncionario = org.jdesktop.observablecollections.ObservableCollections.observableList(new ArrayList<Funcionario>());
         jPanel1 = new javax.swing.JPanel();
         btnPrimeiro = new javax.swing.JButton();
         btnAnterior = new javax.swing.JButton();
@@ -108,7 +107,7 @@ public class FormProduto extends java.awt.Dialog {
         painelAbas = new javax.swing.JTabbedPane();
         Listagem = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tblProduto = new javax.swing.JTable();
+        tblFuncionario = new javax.swing.JTable();
         Dados = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -123,7 +122,14 @@ public class FormProduto extends java.awt.Dialog {
         jLabel4 = new javax.swing.JLabel();
         txtCusto = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtVenda = new javax.swing.JTextField();
+        javax.swing.text.MaskFormatter maskData = null;
+        try{
+            maskData = new javax.swing.text.MaskFormatter("##/##/####");
+            maskData.setPlaceholderCharacter('_');
+        }catch(Exception e){
+            System.out.println("Erro na mascara:" + e);
+        }
+        txtVenda = new javax.swing.JFormattedTextField(maskData);
 
         setTitle("Cadastro de Produtos");
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -179,26 +185,42 @@ public class FormProduto extends java.awt.Dialog {
 
         Listagem.setLayout(new java.awt.BorderLayout());
 
-        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listProduto, tblProduto);
-        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codProduto}"));
+        org.jdesktop.swingbinding.JTableBinding jTableBinding = org.jdesktop.swingbinding.SwingBindings.createJTableBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, listFuncionario, tblFuncionario);
+        org.jdesktop.swingbinding.JTableBinding.ColumnBinding columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${codFuncionario}"));
         columnBinding.setColumnName("Código");
         columnBinding.setColumnClass(Integer.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${descricao}"));
-        columnBinding.setColumnName("Descricao");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cpf}"));
+        columnBinding.setColumnName("Cpf");
         columnBinding.setColumnClass(String.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoCusto}"));
-        columnBinding.setColumnName("Preco Custo");
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${nome}"));
+        columnBinding.setColumnName("Nome");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${departamento}"));
+        columnBinding.setColumnName("Departamento");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${cargo}"));
+        columnBinding.setColumnName("Cargo");
+        columnBinding.setColumnClass(String.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${salario}"));
+        columnBinding.setColumnName("Salario");
         columnBinding.setColumnClass(Double.class);
         columnBinding.setEditable(false);
-        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${precoVenda}"));
-        columnBinding.setColumnName("Preco Venda");
-        columnBinding.setColumnClass(Double.class);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataAdmissao}"));
+        columnBinding.setColumnName("Data Admissao");
+        columnBinding.setColumnClass(java.util.Calendar.class);
+        columnBinding.setEditable(false);
+        columnBinding = jTableBinding.addColumnBinding(org.jdesktop.beansbinding.ELProperty.create("${dataRescisao}"));
+        columnBinding.setColumnName("Data Rescisao");
+        columnBinding.setColumnClass(java.util.Calendar.class);
         columnBinding.setEditable(false);
         bindingGroup.addBinding(jTableBinding);
         jTableBinding.bind();
-        jScrollPane2.setViewportView(tblProduto);
+        jScrollPane2.setViewportView(tblFuncionario);
 
         Listagem.add(jScrollPane2, java.awt.BorderLayout.CENTER);
 
@@ -210,7 +232,7 @@ public class FormProduto extends java.awt.Dialog {
 
         txtCodigo.setEditable(false);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codProduto}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codFuncionario}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +241,7 @@ public class FormProduto extends java.awt.Dialog {
             }
         });
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.descricao}"), txtDescricao, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.descricao}"), txtDescricao, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         txtDescricao.addActionListener(new java.awt.event.ActionListener() {
@@ -273,12 +295,12 @@ public class FormProduto extends java.awt.Dialog {
 
         jLabel4.setText("Preço de Custo:");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoCusto}"), txtCusto, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoCusto}"), txtCusto, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         jLabel6.setText("Preço de Venda:");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoVenda}"), txtVenda, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblFuncionario, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoVenda}"), txtVenda, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
@@ -287,7 +309,7 @@ public class FormProduto extends java.awt.Dialog {
             DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, DadosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(painelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE))
+                .addComponent(painelAcoes, javax.swing.GroupLayout.DEFAULT_SIZE, 700, Short.MAX_VALUE))
             .addGroup(DadosLayout.createSequentialGroup()
                 .addGroup(DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(DadosLayout.createSequentialGroup()
@@ -309,7 +331,7 @@ public class FormProduto extends java.awt.Dialog {
                                 .addComponent(jLabel6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(txtVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(228, Short.MAX_VALUE))
+                .addContainerGap(330, Short.MAX_VALUE))
         );
         DadosLayout.setVerticalGroup(
             DadosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -381,18 +403,18 @@ public class FormProduto extends java.awt.Dialog {
     }//GEN-LAST:event_txtDescricaoActionPerformed
 
     private void btnNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNovoActionPerformed
-        listProduto.add((Produto) new Produto()); // cria um objeto e uma linha na tabela
-        int linha = listProduto.size() - 1;
-        tblProduto.setRowSelectionInterval(linha, linha); //seleciona a linha
+        listFuncionario.add((Funcionario) new Funcionario()); // cria um objeto e uma linha na tabela
+        int linha = listFuncionario.size() - 1;
+        tblFuncionario.setRowSelectionInterval(linha, linha); //seleciona a linha
         txtDescricao.requestFocus(); //caixa de texto com o nome da cidade recebe o foco
         trataEdicao(true);
     }//GEN-LAST:event_btnNovoActionPerformed
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
        if(validaCampos()){
-            int linhaSelecionada = tblProduto.getSelectedRow();
-            Produto objProduto = listProduto.get(linhaSelecionada);
-            objDAOProduto.salvar(objProduto);
+            int linhaSelecionada = tblFuncionario.getSelectedRow();
+            Funcionario objProduto = listFuncionario.get(linhaSelecionada);
+            objDAOFuncionario.salvar(objProduto);
             atualizaTabela();
             trataEdicao(false);
        }
@@ -413,9 +435,9 @@ public class FormProduto extends java.awt.Dialog {
                     JOptionPane.QUESTION_MESSAGE, null, new String[]{"Sim","Não"}, "Sim");
         
         if(opcao == 0) {
-            int linhaSelecionada = tblProduto.getSelectedRow();
-            Produto objProduto = listProduto.get(linhaSelecionada);
-            objDAOProduto.remover(objProduto);
+            int linhaSelecionada = tblFuncionario.getSelectedRow();
+            Funcionario objProduto = listFuncionario.get(linhaSelecionada);
+            objDAOFuncionario.remover(objProduto);
             atualizaTabela();
             trataEdicao(false);
         }
@@ -423,37 +445,37 @@ public class FormProduto extends java.awt.Dialog {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnPrimeiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrimeiroActionPerformed
-        tblProduto.setRowSelectionInterval(0, 0);
-        tblProduto.scrollRectToVisible(tblProduto.getCellRect(0, 0, true));
+        tblFuncionario.setRowSelectionInterval(0, 0);
+        tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(0, 0, true));
     }//GEN-LAST:event_btnPrimeiroActionPerformed
 
     private void btnAnteriorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnteriorActionPerformed
-        int linha = tblProduto.getSelectedRow();
+        int linha = tblFuncionario.getSelectedRow();
         
         if(linha - 1 >= 0) {
             linha--;
         }
         
-        tblProduto.setRowSelectionInterval(linha, linha);
-        tblProduto.scrollRectToVisible(tblProduto.getCellRect(linha, 0, true));
+        tblFuncionario.setRowSelectionInterval(linha, linha);
+        tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
     }//GEN-LAST:event_btnAnteriorActionPerformed
 
     private void btnProximoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProximoActionPerformed
-        int linha = tblProduto.getSelectedRow();
+        int linha = tblFuncionario.getSelectedRow();
         
-        if(linha + 1 <= (tblProduto.getRowCount()) - 1){
+        if(linha + 1 <= (tblFuncionario.getRowCount()) - 1){
             linha++;
         }
         
-        tblProduto.setRowSelectionInterval(linha, linha);
-        tblProduto.scrollRectToVisible(tblProduto.getCellRect(linha, 0, true));
+        tblFuncionario.setRowSelectionInterval(linha, linha);
+        tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
     }//GEN-LAST:event_btnProximoActionPerformed
 
     private void btnUltimoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUltimoActionPerformed
-        int linha = tblProduto.getRowCount() - 1;
+        int linha = tblFuncionario.getRowCount() - 1;
         
-        tblProduto.setRowSelectionInterval(linha, linha);
-        tblProduto.scrollRectToVisible(tblProduto.getCellRect(linha, 0, true));
+        tblFuncionario.setRowSelectionInterval(linha, linha);
+        tblFuncionario.scrollRectToVisible(tblFuncionario.getCellRect(linha, 0, true));
     }//GEN-LAST:event_btnUltimoActionPerformed
 
     /**
@@ -462,7 +484,7 @@ public class FormProduto extends java.awt.Dialog {
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                FormProduto dialog = new FormProduto(new java.awt.Frame(), true);
+                FormFuncionario dialog = new FormFuncionario(new java.awt.Frame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -493,10 +515,10 @@ public class FormProduto extends java.awt.Dialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
-    private java.util.List<Produto> listProduto;
+    private java.util.List<Funcionario> listFuncionario;
     private javax.swing.JTabbedPane painelAbas;
     private javax.swing.JPanel painelAcoes;
-    private javax.swing.JTable tblProduto;
+    private javax.swing.JTable tblFuncionario;
     private javax.swing.JTextField txtCodigo;
     private javax.swing.JTextField txtCusto;
     private javax.swing.JTextField txtDescricao;
