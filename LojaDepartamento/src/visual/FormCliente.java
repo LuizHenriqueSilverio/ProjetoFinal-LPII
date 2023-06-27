@@ -128,7 +128,7 @@ public class FormCliente extends java.awt.Dialog {
         }
         txtNascimento = new javax.swing.JFormattedTextField(maskData);
 
-        setTitle("Cadastro de Cidades");
+        setTitle("Cadastro de Clientes");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);

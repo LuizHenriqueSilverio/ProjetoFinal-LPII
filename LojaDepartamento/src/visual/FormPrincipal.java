@@ -119,7 +119,10 @@ public class FormPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuFuncionarioActionPerformed
 
     private void menuEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEstoqueActionPerformed
-        // TODO add your handling code here:
+        FormEstoque form = new FormEstoque(this, true);
+        form.setLocationRelativeTo(null);
+        form.setResizable(false);
+        form.setVisible(true);
     }//GEN-LAST:event_menuEstoqueActionPerformed
 
     /**

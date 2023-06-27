@@ -123,9 +123,16 @@ public class FormProduto extends java.awt.Dialog {
         jLabel4 = new javax.swing.JLabel();
         txtCusto = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        txtVenda = new javax.swing.JTextField();
+        javax.swing.text.MaskFormatter maskData = null;
+        try{
+            maskData = new javax.swing.text.MaskFormatter("##/##/####");
+            maskData.setPlaceholderCharacter('_');
+        }catch(Exception e){
+            System.out.println("Erro na mascara:" + e);
+        }
+        txtVenda = new javax.swing.JFormattedTextField(maskData);
 
-        setTitle("Cadastro de Cidades");
+        setTitle("Cadastro de Produtos");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 closeDialog(evt);
@@ -210,7 +217,7 @@ public class FormProduto extends java.awt.Dialog {
 
         txtCodigo.setEditable(false);
 
-        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codFuncionario}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        org.jdesktop.beansbinding.Binding binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.codProduto}"), txtCodigo, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
@@ -219,7 +226,7 @@ public class FormProduto extends java.awt.Dialog {
             }
         });
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.nomeFuncionario}"), txtDescricao, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.descricao}"), txtDescricao, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         txtDescricao.addActionListener(new java.awt.event.ActionListener() {
@@ -273,10 +280,13 @@ public class FormProduto extends java.awt.Dialog {
 
         jLabel4.setText("Preço de Custo:");
 
-        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.salarioFuncionario}"), txtCusto, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoCusto}"), txtCusto, org.jdesktop.beansbinding.BeanProperty.create("text"));
         bindingGroup.addBinding(binding);
 
         jLabel6.setText("Preço de Venda:");
+
+        binding = org.jdesktop.beansbinding.Bindings.createAutoBinding(org.jdesktop.beansbinding.AutoBinding.UpdateStrategy.READ_WRITE, tblProduto, org.jdesktop.beansbinding.ELProperty.create("${selectedElement.precoVenda}"), txtVenda, org.jdesktop.beansbinding.BeanProperty.create("text"));
+        bindingGroup.addBinding(binding);
 
         javax.swing.GroupLayout DadosLayout = new javax.swing.GroupLayout(Dados);
         Dados.setLayout(DadosLayout);

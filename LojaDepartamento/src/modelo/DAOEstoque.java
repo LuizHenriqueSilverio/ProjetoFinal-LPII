@@ -57,7 +57,7 @@ public class DAOEstoque {
     }
 
     public boolean incluir(Estoque obj) {
-        String sql = "insert into estoque (quantidade,dataValidade,lote,produtos_codProdutos) values (?,?,?,?)";
+        String sql = "insert into estoque (quantidade, dataValidade, lote, produtos_codProdutos) values (?,?,?,?)";
         try {
             PreparedStatement pst = Conexao.getPreparedStatement(sql);
             pst.setDouble(1, obj.getQuantidade());
