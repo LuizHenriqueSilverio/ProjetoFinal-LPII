@@ -30,6 +30,7 @@ public class FormPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         barraMenu = new javax.swing.JMenuBar();
         menuCadastro = new javax.swing.JMenu();
         menuCidade = new javax.swing.JMenuItem();
@@ -44,6 +45,14 @@ public class FormPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Sistema de Cadastro");
 
+        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\Downloads\\fashion.png")); // NOI18N
+        jLabel1.setText("jLabel1");
+
+        barraMenu.setBackground(new java.awt.Color(0, 153, 153));
+        barraMenu.setBorder(new javax.swing.border.MatteBorder(null));
+
+        menuCadastro.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(153, 51, 0)));
+        menuCadastro.setForeground(new java.awt.Color(0, 204, 204));
         menuCadastro.setText("Cadastro");
 
         menuCidade.setText("Clientes");
@@ -80,6 +89,8 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         barraMenu.add(menuCadastro);
 
+        menuVenda.setBorder(new javax.swing.border.MatteBorder(null));
+        menuVenda.setForeground(new java.awt.Color(0, 204, 204));
         menuVenda.setText("Vendas");
 
         menuVendas.setText("Cadastro");
@@ -92,6 +103,8 @@ public class FormPrincipal extends javax.swing.JFrame {
 
         barraMenu.add(menuVenda);
 
+        menuAjuda.setBorder(new javax.swing.border.MatteBorder(null));
+        menuAjuda.setForeground(new java.awt.Color(0, 204, 204));
         menuAjuda.setText("Ajuda");
 
         menuSobre.setText("Sobre");
@@ -110,11 +123,13 @@ public class FormPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 277, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -202,6 +217,7 @@ public class FormPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar barraMenu;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu menuAjuda;
     private javax.swing.JMenu menuCadastro;
     private javax.swing.JMenuItem menuCidade;

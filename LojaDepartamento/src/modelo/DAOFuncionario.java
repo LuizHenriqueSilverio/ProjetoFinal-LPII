@@ -149,36 +149,22 @@ public class DAOFuncionario {
     }
     
     public Funcionario localizarFuncionario(Integer id) {
-        String sql = "select * from funcionario where codFuncionarios=?";
+        String sql = "select * from funcionarios where codFuncionarios=?";
         Funcionario obj = new Funcionario();
         try {
             PreparedStatement pst = Conexao.getPreparedStatement(sql);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             while (rs.next()) {
-                obj.setCodFuncionario(rs.getInt("codProdutos"));
+                obj.setCodFuncionario(rs.getInt("codFuncionarios"));
                 obj.setNome(rs.getString("nome"));
                 obj.setCpf(rs.getString("cpf"));
                 
-                java.sql.Date dt = rs.getDate("dataAdmissao");
-                Calendar c = Calendar.getInstance();
-                c.setTime(dt);
-                obj.setDataAdmissao(c);
-                
-                if (obj.getDataRescisao() != null) {
-                    pst.setDate(4, new java.sql.Date(obj.getDataRescisao().getTimeInMillis()));
-                } else {
-                    pst.setNull(4, java.sql.Types.DATE);
-                }
-                
-                obj.setDepartamento(rs.getString("departamento"));
-                obj.setSalario(rs.getDouble("salario"));
-                obj.setCargo(rs.getString("cargo"));
                 
                 return obj;
             }
         } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Erro de SQL: " + e.getMessage());
+            JOptionPane.showMessageDialog(null, "Erro de SQL no localizar do DAOFuncionario: " + e.getMessage());
 
         }
         return null;
